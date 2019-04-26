@@ -1,0 +1,7 @@
+multile lines
+-------------
+https://stackoverflow.com/questions/3790454/in-yaml-how-do-i-break-a-string-over-multiple-lines
+
+basic commands
+--------------
+ansible-playbook -vvv -i inventory/inventory.cfg deploy.yml --tags multus

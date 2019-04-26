@@ -1,0 +1,55 @@
+Test k8s
+========
+- kubectl run -it test1 --image=busybox --restart=Never -- /bin/sh
+- kubectl run test2 --image =busybox --restart=Never -- sleep 100d
+- kubectl exec -it test2 /bin/sh
+
+
+check pod ns
+============
+- get pod container id
+  $ kubectl get po <POD-NAME> -o jsonpath='{.status.containerStatuses[0].containerID}' | cut -c 10-21
+- get container pid
+  $ docker inspect --format '{{ .State.Pid }}' <ContainerID>
+- check ns
+  $ nsenter -t <PID> -n ip a
+
+
+add node manually
+=================
+- /etc/sysconfig/flanneld
+  https://kubernetes.io/docs/getting-started-guides/fedora/flannel_multi_node_cluster/
+
+- /etc/kubernetes/kubelet
+  https://kubernetes.io/docs/getting-started-guides/fedora/fedora_manual_config/
+
+- /etc/environment
+
+- /etc/kubernetes/config
+
+- /etc/kubernetes/manifests/kube-proxy.yaml
+
+
+tricks
+======
+- deploy/cmd/destroy
+  kubectl run test1 --rm --restart=Never -it --image=busybox -- ip a
+- deploy
+  kubectl run test1 --image=docker.io/busybox:latest -it sh
+- get pod id
+  kubectl get pod | grep test1
+- run command
+  kubectl exec test1-xxxxxxxxx-xxxxx -t -- ip a
+
+
+flannel
+=======
+container to internet
+---------------------
+container veth -> veth in host bridge -> iptable (masq) -> internet
+
+container to container
+----------------------
+container veth -> veth in host bridge -> host routing -> flannel -> vxlan -> peer flannel
+-> peer host routing -> veth in peer host bridge -> peer container veth
+

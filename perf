@@ -1,0 +1,75 @@
+top
+===
+- monitor threads of a process
+  $ top -H -p <pid>
+- toggle columns: f
+
+
+ps
+==
+- list threads of a process
+  $ ps -T -p <pid>
+- show wchan
+  $ ps -elf
+  $ ps -ax -o wchan,cmd
+  $ ps -T -p <pid> -o wchan,cmd
+
+
+/proc/<pid>
+===========
+- check threads: cd tasks/
+- current code: cat stack
+- waiting: cat wchan
+- sched: cat sched
+
+
+dd
+==
+- 1GB uncached write test, 1MB block size
+  $ rm -f testf && sudo sync
+  $ dd if=/dev/zero of=testf bs=1M count=1024 conv=fdatasync
+
+- 1GB uncached read test, 1MB block size
+  $ dd if=testf of=/dev/null bs=1M iflag=direct
+
+
+vm disk cache mode
+==================
+https://www.suse.com/documentation/sles11/book_kvm/data/sect1_1_chapter_book_kvm.html
+
+
+tools
+=====
+- top
+  * https://www.booleanworld.com/guide-linux-top-command/
+- sar
+  * https://www.thegeekstuff.com/2011/03/sar-examples/?utm_source=feedburner
+
+
+ss
+==
+ss -i -t -4 -e
+
+
+flame graph
+===========
+https://queue.acm.org/detail.cfm?id=2927301
+
+
+ftrace
+======
+- trace-cmd, kernelshark
+  * how to calculate syscall time
+
+
+usdt
+====
+$ sudo perf probe -x /lib/aarch64-linux-gnu/libc-2.27.so -V malloc
+$ sudo perf probe -x /lib/aarch64-linux-gnu/libc-2.27.so -a 'malloc bytes'
+$ sudo perf stat -e probe_libc:malloc ls
+$ sudo perf probe -d probe_libc:malloc
+
+
+others
+======
+https://jvns.ca/blog/2017/07/05/linux-tracing-systems/

@@ -1,0 +1,455 @@
+change users listed in login screen
+-----------------------------------
+/etc/login.defs -> UID_MIN, GID_MIN
+
+
+grub single usermode
+--------------------
+http://www.noah.org/wiki/Single_User_Mode
+
+screen size in text mode
+------------------------
+$ vi /etc/default/grub
+GRUB_CMDLINE_LINUX="vga=791"
+GRUB_GFXMODE=1024x768
+
+show boot menu
+---------------
+(/etc/default/grub)
+GRUB_DEFAULT=0
+#GRUB_HIDDEN_TIMEOUT=0
+#GRUB_HIDDEN_TIMEOUT_QUIET=true
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT=""
+GRUB_CMDLINE_LINUX=""
+
+
+PXE
+---
+ubuntu
+https://www.maketecheasier.com/configure-pxe-server-ubuntu/
+
+redhat
+https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-installation-server-setup.html
+
+fedora
+https://docs.fedoraproject.org/en-US/Fedora/21/html/Installation_Guide/chap-pxe-server-setup.html
+
+
+remote desktop
+--------------
+search "desktop sharing"
+
+disable encrytion
+- $ dconf-editor
+- find "5900"
+
+
+ui config
+---------
+super -> app -> unity tweak tool
+
+
+auto update
+-----------
+sudo systemctl disable apt-daily.service # disable run when system boot
+sudo systemctl disable apt-daily.timer   # disable timer run
+
+/etc/apt/apt.conf.d/20auto-upgrades
+>> APT::Periodic::Update-Package-Lists "0";
+>> APT::Periodic::Unattended-Upgrade "0";
+
+
+font size in text mode (ubunt-15)
+---------------------------------
+fonts are under /usr/share/consolefonts, to test font:
+$ setfont Uni2-TerminusBold20x10
+
+$ vi /etc/default/console-setup
+Ubuntu-14:
+  CODESET="Uni2"
+  FONTFACE="TerminusBold"
+  FONTSIZE="20x10"
+Ubuntu-15:
+  FONTFACE="TerminusBold"
+  FONTSIZE="10x20"
+
+For Ubuntu-15, add "setupcon" to /etc/rc.local
+
+
+ftp server
+----------
+$sudo apt-get install pure-ftpd
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+router
+===================================================================================
+
+network configuration
+---------------------
+eth0: lan, static, 172.29.0.0/16
+eth1: wan, dhcp, 10.164.2.153
+
+
+ip masquerading
+---------------
+# iptables -A FORWARD -o eth1 -i eth0 -s 172.29.0.0/16 -m conntrack --ctstate NEW -j ACCEPT
+# iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+# iptables -t nat -F POSTROUTING
+# iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
+
+# iptables-save | sudo tee /etc/iptables.sav
+add "iptables-restore < /etc/iptables.sav" into /etc/rc.local before the "exit 0" line
+
+
+ip forwarding
+-------------
+$ sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+uncomment "net.ipv4.ip_forward=1" in /etc/sysctl.conf
+
+
+port mapping
+------------
+http://brianckelley.com/2015/02/simple-easy-nat-port-forwarding-for-iptables-ubuntu/
+
+(eth1:5022 <--> 172.29.1.152:22)
+iptables -I FORWARD -p tcp -i eth1 -d 172.29.1.152 --dport 5022 -j ACCEPT
+iptables -t nat -A PREROUTING -p tcp -i eth1 -d 10.164.2.153 --dport 5022 -j DNAT --to-destination 172.29.1.152:22
+
+
+port mapping for libvirt vm
+---------------------------
+http://wiki.libvirt.org/page/Networking#Forwarding_Incoming_Connections
+
+iptables -I FORWARD -o virbr0 -d $GUEST_IP -j ACCEPT
+iptables -t nat -I PREROUTING -p tcp --dport $HOST_PORT -j DNAT --to $GUEST_IP:$GUEST_PORT
+
+
+client setup
+------------
+$ sudo route add default gw 172.29.1.10 eth0
+add "gateway 172.29.1.10" to /etc/network/interfaces under "iface eth0"
+
+urls
+----
+https://help.ubuntu.com/community/Internet/ConnectionSharing
+https://rbgeek.wordpress.com/2012/05/14/ubuntu-as-a-firewallgateway-router/
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+wget
+====
+wget -r -np -nH --cut-dirs=4 -R index.html* http://images.maas.io/ephemeral-v2/daily/wily/arm64/ddd/
+
+Explanation:
+?It will download all files and subfolders in ddd directory:
+?recursively (-r), 
+?not going to upper directories (-np),
+?not saving files to hostname folder "images.maas.io/" (-nH), 
+?but to ddd by omitting first 4 folders "ephemeral-v2/daily/wily/arm64/" (--cut-dirs=4)
+?excluding index.html files (-R index.html*)
+
+
+outlook
+=======
+https://computing.artsci.wustl.edu/help/o365/thunderbird (sendmail: smtp.office365.com)
+https://github.com/Ericsson/exchangecalendar/wiki/How-to-Add-Your-Calendar-to-Thunderbird
+
+- sudo apt install xul-ext-lightning
+- https://github.com/ExchangeCalendar/exchangecalendar
+
+
+
+set tab title
+=============
+The .bashrc solution proposed by Kirby worked for me:
+set-title(){
+  ORIG=$PS1
+  TITLE="\e]2;$@\a"
+  PS1=${ORIG}${TITLE}
+}
+then from my prompt: $ set-title test-title
+
+
+iconize by clicking on toolbar (trusty)
+=======================================
+gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
+
+
+enable ssh password login
+==========================
+$ sudo vi /etc/ssh/sshd_config
+  "PasswordAuthentication yes"
+  "ChallengeResponseAuthentication yes"
+  "UsePAM yes"
+
+$ sudo /etc/init.d/ssh reload
+
+
+cron
+====
+http://www.thegeekstuff.com/2009/06/15-practical-crontab-examples/
+
+
+dual ip for one nic
+===================
+sudo ip address add 172.29.100.100/16 dev eth0
+sudo ip address del 172.29.100.100/16 dev eth0
+
+
+nic offload setting
+===================
+sudo ethtool -k eth0  --> list settings
+sudo ethtool -K eth0 rx-vlan-filter off
+
+
+static dns with dhcp
+====================
+https://help.ubuntu.com/community/StaticDnsWithDhcp
+
+
+show my public ip
+=================
+curl http://icanhazip.com/
+
+
+dump dts
+========
+http://suihkulokki.blogspot.tw/2015/04/fastest-way-to-change-running-dtb.html
+
+# apt-get install device-tree-compiler
+# dtc -I fs -O dts -o current.dts /proc/device-tree/
+
+$ dtc -I dts -O dtb -o new.dtb current.dts
+
+
+cpio
+====
+modify initramfs: http://backreference.org/2010/07/04/modifying-initrdinitramfs-files/
+
+compress:   find . | cpio -o -H newc > /tmp/initrd.cpio
+decompress: cpio -div < /tmp/initrd.cpio
+
+
+file as /dev/sdb
+================
+$ dd if=/dev/zero of=virtual_hard_drive.bin bs=1M count=1024
+$ mknod /dev/sdb b 7 500
+$ losetup /dev/sdb virtual_hard_drive.bin
+
+
+ssh slow
+========
+https://superuser.com/questions/166359/top-causes-of-slow-ssh-logins
+$ sudo systemctl restart systemd-logind
+
+
+passwordless sudo
+=================
+$ sudo VISUAL=vim visudo
+linux ALL=(ALL) NOPASSWD:ALL
+
+
+system recovery
+===============
+http://xmodulo.com/how-to-reset-root-password-in-debian-ubuntu.html
+
+
+setup apt repo
+==============
+https://askubuntu.com/questions/170348/how-to-create-a-local-apt-repository
+$ dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
+
+
+extglob
+=======
+$ shopt -s extglob
+$ ls !(a*) -> list files NOT start with 'a'
+
+
+mount whole disk image(not partition)
+=====================================
+$ fdisk -lu vmdisk
+Device        Start      End  Sectors  Size Type
+vmdisk1        2048  1050623  1048576  512M EFI System
+vmdisk2     1050624 16963583 15912960  7.6G Linux filesystem
+vmdisk3    16963584 20969471  4005888  1.9G Linux swap
+
+$ sudo mount -o loop,offset=$((1050624*512)) vmdisk /mnt
+
+
+create ubuntu boot usb
+======================
+startup disk creator
+
+
+use own repo
+============
+deb http://wls-x86-hp07.shanghai.arm.com/debian-openstack/ ./
+
+
+bridge
+======
+auto brAdm
+iface brAdm inet static
+  bridge_ports eth1
+  address 192.168.234.253/24
+
+
+pin package version
+===================
+$ sudo vi /etc/apt/preferences.d/virt
+
+Package: libvirt-bin libvirt0
+Pin: version 1.3.1-1ubuntu10.12
+Pin-Priority: 900
+
+$ sudo apt-mark hold xxx
+
+
+vlan nic
+========
+https://wiki.ubuntu.com/vlan
+
+
+git proxy
+=========
+https://cms-sw.github.io/tutorial-proxy.html
+
+ssh -f -N -D 3333 linaro@uk1
+git -c "http.proxy=socks5://localhost:3333" clone https://github.com/pytorch/pytorch
+
+
+resize partition
+================
+- fix gpt error
+  $ sudo parted -l
+- grow partition
+  $ sudo apt install cloud-utils
+  $ sudo growpart /dev/sda 2
+- grow file system
+  $ sudo resize2fs /dev/sda2
+
+
+ssh tunnel
+==========
+p3OO --lan--> hp07 --vpn--> uk1 --> other side of wall
+- hp07:~/$ ssh -X -f -N -D 10.169.41.138:3333 linaro@10.101.2.102
+- p3OO:~/$ curl --socks5 hp07:3333 http://xxx/yyy -o yyy
+- p3OO:~/$ git -c "http.proxy=socks5://hp07:3333" clone xxx
+
+
+nested kvm
+==========
+<cpu mode='custom' match='exact'>
+  <model fallback='allow'>Haswell-noTSX</model>
+  <feature policy='require' name='vmx'/>
+</cpu>
+
+
+loop lvm
+========
+$ export LOOPDEV=/dev/loop2
+$ sudo apt install lvm2 && sudo systemctl start lvm2-lvmetad
+$ dd if=/dev/zero of=lvm1.img bs=1M count=20K
+$ sudo losetup $LOOPDEV lvm1.img
+$ sudo pvcreate $LOOPDEV
+$ sudo vgcreate vg1 $LOOPDEV
+$ sudo lvcreate -n lv1 -l 100%FREE vg1
+
+
+build kernel
+============
+https://www.maketecheasier.com/build-custom-kernel-ubuntu/
+https://debian-handbook.info/browse/stable/sect.kernel-compilation.html#sect.kernel-build
+
+
+vim
+===
+- check current file type
+  :set ft?
+- system clipboard
+  "+y
+  "+p
+
+
+curl & run script
+=================
+https://stackoverflow.com/questions/4642915/passing-parameters-to-bash-when-executing-a-script-fetched-by-curl
+
+
+gpg
+===
+- create key
+  $ gpg --gen-key
+
+- list/export keys
+  $ gpg -k
+  $ gpg --export -a
+  $ gpg -a -o yibocai.gpg --export yibo.cai@arm.com
+
+- upload to keyserver
+  $ gpg --keyserver hkp://keys.gnupg.net --send-keys 32BA38F0
+  $ gpg --keyserver hkp://pgp.key-server.io:11371 --send-keys 32BA38F0
+  upload manually to http://pgp.mit.edu/, https://keyserver.pgp.com/
+
+- search keyserver by mail
+  $ gpg --search-keys yibo.cai@arm.com
+
+
+jenkins time format
+===================
+https://stackoverflow.com/questions/12472645/how-to-schedule-jobs-in-jenkins
+
+
+max open files
+==============
+$ ulimit -Hn
+$ ulimit -Sn
+$ ulimit -Sn 8888
+
+
+build iso
+=========
+genisoimage -r -V "Estuary Ubuntu Install CD" -J -l -o ubuntu-4.12.iso ./ubuntu16-4.12/
+
+
+kernel
+======
+- source
+  https://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/xenial
+- changelog
+  https://launchpad.net/ubuntu/+source/linux/+changelog
+  https://askubuntu.com/questions/55355/where-is-the-changelog-for-ubuntu-kernels
+
+
+git send-email
+==============
+https://www.freedesktop.org/wiki/Software/PulseAudio/HowToUseGitSendEmail/
+- git send-email --to cyb70289@sina.com --cc cyb70289@163.com --annotate -v2 -1
+
+
+new document
+============
+- vi ~/.config/user-dirs.dirs
+ XDG_TEMPLATES_DIR="$HOME/.Templates"
+- touch ~/.Templates/"Untitled Document"
+
+
+list package dependencies
+=========================
+apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --no-pre-depends ceph-osd | grep "^\w" | sort -u
+
+
+disable/enable cpu
+==================
+- sudo chcpu -d 112-223
+- sudo chcpu -e 112-223
+- /sys/devices/system/cpu/{online,offline}
+
+
+iconv
+=====
+echo -e -n "\xf1\x80\x80\x80" | iconv -f UTF-8 -t UTF-16LE - | od -t x2

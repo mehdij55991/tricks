@@ -1,0 +1,22 @@
+disk io alignment
+-----------------
+- https://www.percona.com/blog/2011/06/09/aligning-io-on-a-hard-disk-raid-the-theory/
+
+tools
+-----
+- sudo lshw -c disk
+- sudo hdparm -Tt /dev/sda
+- https://dotlayer.com/how-to-use-fio-to-measure-disk-performance-in-linux/
+
+diskid
+------
+/dev/disk/by-id/...
+
+ssd
+---
+- cat /sys/block/sda/queue/rotational
+
+sector size
+-----------
+cat /sys/class/block/<dev>/queue/logical_block_size
+cat /sys/class/block/<dev>/queue/physical_block_size

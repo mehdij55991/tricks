@@ -1,0 +1,125 @@
+check namespace
+===============
+https://unix.stackexchange.com/questions/113530/how-to-find-out-namespace-of-a-particular-process
+
+
+without sudo on centos
+======================
+https://coderleaf.wordpress.com/2017/02/10/run-docker-as-user-on-centos7/
+
+/etc/docker/daemon.json
+{
+    "live-restore": true,
+    "group": "dockerroot"
+}
+
+
+dangling
+========
+docker images -q -f dangling=true
+docker volume rm `docker volume ls -q -f dangling=true`
+
+
+export/import local image
+=========================
+$ docker save -o image-name.tar image-name
+$ docker load -i image-name.tar
+
+
+push to docker hub
+==================
+http://karlcode.owtelse.com/blog/2017/01/25/push-a-docker-image-to-personal-repository/
+$ docker tag myimage:tag0 cyb70289/myimage:tag0
+$ docker login 
+$ docker push cyb70289/myimage:tag0
+
+
+use screen in docker
+====================
+# exec >/dev/tty 2>/dev/tty </dev/tty
+
+
+helper functions
+================
+# $1: container name
+function docker-exec()
+{
+  docker exec -it $1 /bin/bash
+}
+
+# $1: container name
+function docker-ssh()
+{
+  cip=`docker inspect --format '{{ .NetworkSettings.IPAddress }}' $1`
+  ssh linux@${cip}
+}
+
+# $1: container name
+# $2: image name
+# $3: cmd, optional
+function docker-run()
+{
+  docker run -id --name=$1 --hostname=$1 -v ~/share:/home/share $2 $3
+}
+
+# $1: container name
+# $2: image name
+# $3: cmd, optional
+function docker-runp()
+{
+  docker run --privileged=true -id --name=$1 --hostname=$1 -v ~/share:/home/share $2 $3
+}
+
+
+dual nic
+========
+$ docker network create --subnet=192.168.33.0/24 --ip-range=192.168.33.0/24 --gateway=192.168.33.254 pxe
+
+$ docker create --privileged=true --name=pxe --hostname=pxe -v ~/share:/home/share pxe:base
+$ docker network connect pxe --ip 192.168.33.1 pxe
+$ docker start pxe
+
+maas
+----
+$ docker network create --subnet=192.168.234.0/24 --ip-range=192.168.234.0/24 --gateway=192.168.234.254 maas-pxe
+$ docker create --privileged=true --name=joid --hostname=joid -v ~/share:/home/share -p 5240:5240 maas:v1
+$ docker network connect --ip 192.168.234.253 maas-pxe joid
+$ docker start joid
+
+
+flatten image
+=============
+1. start a docker of that image
+2. docker export <docker-name> | docker import - <image-name>:<tag>
+NOTE: CMD will lose
+
+
+update imgae CMD
+=================
+1. start a docker of that iamge
+2. docker commit --change='CMD ["/sbin/init"]' <docker-name> <image-name>:<tag>
+
+
+getty pegs host cpu
+===================
+$ sudo systemctl stop getty@tty1.service
+$ sudo systemctl disable getty@tty1.service
+
+
+local registry
+==============
+- server:
+  $ mkdir repo
+  $ docker run -d -p 5000:5000 -v $(pwd)/repo:/var/lib/registry \
+    --restart=always --name registry registry:2
+
+- client: add to /etc/default/docker
+          DOCKER_OPTS="--insecure-registry wls-x86-hp07.shanghai.arm.com:5000"
+
+
+check network namespace
+=======================
+https://stackoverflow.com/questions/31265993/docker-networking-namespace-not-visible-in-ip-netns-list
+
+$ docker inspect --format '{{.State.Pid}}' <container_name_or_Id>
+$ nsenter -t <contanier_pid> -n <command>

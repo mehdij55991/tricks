@@ -1,0 +1,41 @@
+Tap interfaces
+--------------
+http://baturin.org/docs/iproute2/#Add%20an%20tun/tap%20device%20useable%20by%20root
+
+ovs+vlan
+--------
+http://blog.scottlowe.org/2012/10/04/some-insight-into-open-vswitch-configuration/
+http://blog.scottlowe.org/2012/10/19/vlans-with-open-vswitch-fake-bridges/
+http://blog.scottlowe.org/2012/11/07/using-vlans-with-ovs-and-libvirt/
+
+ovs flow table
+--------------
+http://openvswitch.org/support/dist-docs-2.5/tutorial/Tutorial.md.html
+
+tagged/untagged
+---------------
+tagged = trunk
+untagged = access
+http://www.microhowto.info/howto/configure_an_ethernet_interface_as_a_vlan_trunk.html
+
+vxlan
+-----
+- show vxlan info
+  $ bridge fdb show dev vxlan0
+
+wireshark, tshark
+-----------------
+- capture to pcap file
+  $ sudo tshark -i eth0 -w /tmp/1.pcap -F pcap
+
+iptables
+--------
+https://www.booleanworld.com/depth-guide-iptables-linux-firewall/
+https://manpages.debian.org/stretch/iptables/iptables-extensions.8.en.html
+
+dpdk
+----
+- https://doc.dpdk.org/guides/linux_gsg/build_sample_apps.html
+- make install EXTRA_CFLAGS=-g T=arm64-armv8a-linuxapp-gcc -j8
+
+infiniband/verbs.h: libibverbs-dev

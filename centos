@@ -1,0 +1,105 @@
+gateway, dns
+------------
+/etc/sysconfig/network
+
+DNS1=172.29.1.10
+GATEWAY=172.29.1.10
+
+
+install kvm
+-----------
+http://www.itzgeek.com/how-tos/linux/centos-how-tos/install-kvm-qemu-on-centos-7-rhel-7.html
+
+$ sudo yum install --setopt=obsoletes=0 qemu-kvm
+$ sudo yum install libvirt virt-manager bridge-utils
+
+$ sudo systemctl enable libvirtd.service
+$ sudo systemctl start libvirtd.service
+
+$ sudo systemctl enable virtlogd.socket
+$ sudo systemctl start virtlogd.socket
+
+$ sudo gpasswd -a <username> libvirt
+
+copy /usr/share/AAVMF/
+
+
+dependency error
+----------------
+- download package
+  # yumdownloader unbound-libs
+- install manually
+  # rpm -i --nofiles --nodigest --nodeps unbound-libs-1.4.20-26.el7.x86_64.rpm
+
+
+yum/rpm usage
+-------------
+- find repo by binary name
+$ yum provides */virsh
+
+- extract rpm
+$ rpm2cpio xxx.rpm | cpio -div
+
+- list files in an installed package
+$ rpm -ql package-name
+
+$ yum clean all
+
+- lock version
+$ yum install yum-plugin-versionlock
+$ yum versionlock libguestfs-1.28.1
+
+
+add to wheel group
+------------------
+# gpasswd -a <username> wheel
+
+
+X11 forward
+-----------
+$ sudo yum install xauth
+$ sudo yum install dejavu-lgc-sans-fonts
+$ vi /etc/ssh/sshd_config
+  X11Forwarding yes
+  X11UseLocalhost no
+
+X11 forward with root
+---------------------
+$ sudo -s
+# export XAUTHORITY=/home/linux/.Xauthority
+# xterm
+
+
+lvm
+---
+sudo vgscan
+sudo vgchange -a y
+
+
+pip
+---
+sudo yum install python-setuptools
+sudo easy_install pip
+
+
+source code
+-----------
+http://vault.centos.org/7.3.1611/os/Source/SPackages/
+
+
+expand rootfs
+-------------
+1. sudo yum install -y cloud-utils-growpart
+2. sudo growpart /dev/sda 2
+3. sudo resize2fs /dev/sda2
+
+
+customize packages in distro iso
+--------------------------------
+- https://github.com/Frodox/bitthinker.com/blob/master/content/en/develop/how-to-create-custom-centos-like-linux-distro-iso.md
+- http://yum.baseurl.org/wiki/RepoCreate
+
+update grub
+-----------
+- vi /etc/default/grub
+- grub2-mkconfig -o /boot/efi/EFI/centos/grub
