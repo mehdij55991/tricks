@@ -41,6 +41,11 @@ syntax enable
 "  call dein#install()
 "endif
 
+let g:deoplete#enable_at_startup = 1
+
+let g:zenburn_disable_Label_underline = 1
+colorscheme zenburn
+
 set ruler
 set whichwrap=b,s,<,>,[,]
 set backspace=indent,eol,start
@@ -51,13 +56,6 @@ map <F4> :nohlsearch<CR>
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-let g:zenburn_disable_Label_underline = 1
-colorscheme zenburn
-
-let g:deoplete#enable_at_startup = 1
-"let g:python3_host_prog = '/home/linux/.venv/bin/python3'
-"let $VIRTUAL_ENV = '/home/linux/.venv'
-
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "inoremap qq <C-O>:pc<CR>
@@ -65,3 +63,8 @@ autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
 
 set laststatus=1
 set completeopt-=preview
+
+autocmd BufNewFile,BufRead /home/linux/isa-l*/* set tabstop=8 shiftwidth=8 noexpandtab
+
+set exrc
+set secure
