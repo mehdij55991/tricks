@@ -1,3 +1,10 @@
 dynamic lib
 -----------
 https://www.technovelty.org/linux/plt-and-got-the-key-to-code-sharing-and-dynamic-libraries.html
+
+
+find threads belong to same physical core
+-----------------------------------------
+https://unix.stackexchange.com/questions/57920/how-do-i-know-which-processors-are-physical-cores
+
+for file in /sys/devices/system/cpu/cpu[0-9]*/topology/thread_siblings_list; do echo -n "$file "; cat $file; done |sort -k2 -n
