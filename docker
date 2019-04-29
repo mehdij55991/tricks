@@ -123,3 +123,8 @@ https://stackoverflow.com/questions/31265993/docker-networking-namespace-not-vis
 
 $ docker inspect --format '{{.State.Pid}}' <container_name_or_Id>
 $ nsenter -t <contanier_pid> -n <command>
+
+
+pull from mirror
+================
+docker pull hub-mirror.c.163.com/library/fedora:29
