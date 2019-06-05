@@ -5,6 +5,20 @@ https://www.technovelty.org/linux/plt-and-got-the-key-to-code-sharing-and-dynami
 
 find threads belong to same physical core
 -----------------------------------------
-https://unix.stackexchange.com/questions/57920/how-do-i-know-which-processors-are-physical-cores
+- https://github.com/DPDK/dpdk/blob/master/usertools/cpu_layout.py
+- https://unix.stackexchange.com/questions/57920/how-do-i-know-which-processors-are-physical-cores
 
-for file in /sys/devices/system/cpu/cpu[0-9]*/topology/thread_siblings_list; do echo -n "$file "; cat $file; done |sort -k2 -n
+
+git send-email
+--------------
+- sudo apt install git-email
+- .git/config
+  [sendemail]
+    smtpuser = yibcai01
+    smtpserver = foss.arm.com
+    smtpencryption = tls
+    smtpserverport = 587
+    to = seastar-dev@googlegroups.com
+    suppresscc = self
+- send latest 3 commits from current branch
+  $ git send-email -3 -v1 --annotate --cc <other-email> [--dry-run]
