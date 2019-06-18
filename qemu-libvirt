@@ -1,0 +1,9 @@
+start vm from hd
+================
+x86
+---
+sudo qemu-system-x86_64 -smp 2 -enable-kvm -m 4096 -hda myvm.qcow2
+
+arm
+---
+sudo qemu-system-aarch64 -machine virt,gic-version=3 -cpu host -enable-kvm -pflash /usr/share/AAVMF/AAVMF_CODE.fd -pflash myvm_VARS.fd -m 16384 -smp 2 -hda myvm.qcow2 -nographic
