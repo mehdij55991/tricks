@@ -423,6 +423,8 @@ kernel
 - changelog
   https://launchpad.net/ubuntu/+source/linux/+changelog
   https://askubuntu.com/questions/55355/where-is-the-changelog-for-ubuntu-kernels
+- mainline kernel binary
+  https://kernel.ubuntu.com/~kernel-ppa/mainline/
 
 
 git send-email
@@ -453,3 +455,10 @@ disable/enable cpu
 iconv
 =====
 echo -e -n "\xf1\x80\x80\x80" | iconv -f UTF-8 -t UTF-16LE - | od -t x2
+
+
+set env in sudo
+===============
+function sudo () {
+  /usr/bin/sudo bash -c "source env-file && $@"
+}
