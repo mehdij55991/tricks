@@ -360,12 +360,6 @@ $ sudo vgcreate vg1 $LOOPDEV
 $ sudo lvcreate -n lv1 -l 100%FREE vg1
 
 
-build kernel
-============
-https://www.maketecheasier.com/build-custom-kernel-ubuntu/
-https://debian-handbook.info/browse/stable/sect.kernel-compilation.html#sect.kernel-build
-
-
 vim
 ===
 - check current file type
@@ -419,12 +413,39 @@ genisoimage -r -V "Estuary Ubuntu Install CD" -J -l -o ubuntu-4.12.iso ./ubuntu1
 kernel
 ======
 - source
-  https://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/xenial
+  https://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/disco
+  git://kernel.ubuntu.com/ubuntu/ubuntu-disco
 - changelog
   https://launchpad.net/ubuntu/+source/linux/+changelog
   https://askubuntu.com/questions/55355/where-is-the-changelog-for-ubuntu-kernels
 - mainline kernel binary
   https://kernel.ubuntu.com/~kernel-ppa/mainline/
+
+
+build kernel
+============
+stock
+-----
+- https://wiki.ubuntu.com/Kernel/BuildYourOwnKernel (don't follow all)
+- apply patches:
+  ~ debian.master/etc/kernelconfig:   change 'archs="arm64"'
+  ~ debian/rules.d/1-maintainer.mk:   delete 'rm -rf build'
+  ~ debian/scripts/misc/kernelconfig: delete 'rm -rf build'
+- steps:
+  ~ chmod a+x debian/rules
+  ~ chmod a+x debian/scripts/*
+  ~ chmod a+x debian/scripts/misc/*
+  ~ fakeroot debian/rules clean
+  ~ fakeroot debian/rules editconfigs
+  ~ cd build
+  ~ make -j32 LOCALVERSION=-custom
+  ~ sudo make modules_install
+  ~ sudo make install
+
+upstream
+--------
+- https://wiki.ubuntu.com/KernelTeam/GitKernelBuild
+- https://www.maketecheasier.com/build-custom-kernel-ubuntu/
 
 
 git send-email
