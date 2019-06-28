@@ -481,5 +481,6 @@ echo -e -n "\xf1\x80\x80\x80" | iconv -f UTF-8 -t UTF-16LE - | od -t x2
 set env in sudo
 ===============
 function sudo () {
-  /usr/bin/sudo bash -c "source env-file && $@"
+  args="$@"
+  /usr/bin/sudo bash -c "source env-file && $args"
 }
