@@ -39,3 +39,8 @@ hugepage
   echo 2048 > /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 - per node hugepage
   /sys/devices/system/node/[node_id]/hugepages/hugepages-2048kB/nr_hugepages
+
+
+gcc arch details
+================
+gcc -march=native -Q --help=target
