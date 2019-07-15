@@ -6,7 +6,15 @@ sudo qemu-system-x86_64 -smp 2 -enable-kvm -m 4096 -hda myvm.qcow2
 
 arm
 ---
-sudo qemu-system-aarch64 -machine virt,accel=kvm,gic-version=3 -cpu host -enable-kvm -pflash /usr/share/AAVMF/AAVMF_CODE.fd -pflash myvm_VARS.fd -m 16384 -smp 2 -drive file=myvm.qcow2,format=qcow2,index=0,media=disk -nographic
+sudo ip tuntap add dev tapqemu mode tap
+sudo brctl addif virbr0 tapqemu
+
+sudo qemu-system-aarch64 -machine virt,accel=kvm,gic-version=3 \
+     -cpu host -enable-kvm -m 8G -smp 8 \
+     -pflash /usr/share/AAVMF/AAVMF_CODE.fd -pflash myvm_VARS.fd \
+     -drive file=myvm.qcow2,format=qcow2,index=0,media=disk \
+     -netdev tap,id=mynet0,ifname=tapqemu,script=no,downscript=no -device virtio-net-device,netdev=mynet0 \
+     -nographic
 
 console options
 ---------------
