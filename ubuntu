@@ -240,8 +240,10 @@ $ mknod /dev/sdb b 7 500
 $ losetup /dev/sdb virtual_hard_drive.bin
 
 
-ssh slow
-========
+login/ssh slow
+==============
+try remove /etc/update-motd.d/*
+
 https://superuser.com/questions/166359/top-causes-of-slow-ssh-logins
 $ sudo systemctl restart systemd-logind
 
