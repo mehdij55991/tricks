@@ -8,6 +8,7 @@ arm
 ---
 sudo ip tuntap add dev tapqemu mode tap
 sudo brctl addif virbr0 tapqemu
+sudo ip link set tapqemu up
 
 sudo qemu-system-aarch64 -machine virt,accel=kvm,gic-version=3 \
      -cpu host -enable-kvm -m 8G -smp 8 \
