@@ -1,0 +1,43 @@
+compare & exchange (val)
+========================
+
+Guarantees:
+- only one thread will set v to new_v on concurrency
+- oldv will always reflect latest v globally
+
+sync
+----
+
+old_v = __sync_val_compare_and_swap(&v, expected_v, new_v);
+
+again:
+    old_v = v;
+    if (v == expected_v) {
+        if (v changed) goto again; else v = new_v;
+    }
+
+atomic
+------
+
+old_v = expected_v;
+__atomic_compare_exchange_n(&v, &old_v, new_v, false, __ATOMIC_RELAXED, __ATOMIC_RELAXED);
+
+    old_v = expected_v;
+again:
+    if (v == old_v) {
+        if (v changed) goto again; else v = new_v;
+    } else {
+        old_v = v;
+    }
+
+
+compare & exchange (bool)
+=========================
+
+bool ret = __sync_bool_compare_and_swap(&v, expected_v, new_v);
+
+old_v = expected_v;
+bool ret = __atomic_compare_exchange_n(&v, &old_v, new_v, ....);
+
+Guarantees:
+- only one thread will set v to new_v and return true on concurrency.
