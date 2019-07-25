@@ -1,0 +1,27 @@
+set nocompatible
+set ruler
+set whichwrap=b,s,<,>,[,]
+set backspace=indent,eol,start
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set wrap
+set hlsearch
+set ignorecase smartcase
+set background=dark
+
+hi Comment ctermfg=blue
+syntax enable
+filetype indent plugin on
+
+map <F2> :set shiftwidth=4 tabstop=4 expandtab<CR>
+map <F3> :set shiftwidth=8 tabstop=8 noexpandtab<CR>
+map <F4> :nohlsearch<CR>
+
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\""
+autocmd Filetype python setlocal sw=4 ts=4 expandtab
+autocmd Filetype java setlocal sw=2 ts=2 expandtab
+
+set t_Co=256
+let g:zenburn_disable_Label_underline = 1
+"colorscheme zenburn
