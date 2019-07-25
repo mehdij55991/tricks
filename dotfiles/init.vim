@@ -66,12 +66,12 @@ colorscheme zenburn
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "inoremap qq <C-O>:pc<CR>
-autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
+autocmd InsertLeave * if pumvisible() == 0 | pclose
 set laststatus=1
 set completeopt-=preview
 
 " save last position
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\""
 
 " key mappings
 nnoremap <F2> :set shiftwidth=4 tabstop=4 expandtab<CR>
