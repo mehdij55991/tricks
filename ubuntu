@@ -225,12 +225,23 @@ http://suihkulokki.blogspot.tw/2015/04/fastest-way-to-change-running-dtb.html
 $ dtc -I dts -O dtb -o new.dtb current.dts
 
 
-cpio
-====
-modify initramfs: http://backreference.org/2010/07/04/modifying-initrdinitramfs-files/
+initramfs
+=========
+The uncompressed cpio archive must be the first. Compressed cpio archives must
+be after the uncompressed one.
 
-compress:   find . | cpio -o -H newc > /tmp/initrd.cpio
-decompress: cpio -div < /tmp/initrd.cpio
+add files
+---------
+https://www.kernel.org/doc/Documentation/acpi/initrd_table_override.txt
+- mkdir -p kernel/firmware/acpi
+- cp dsdt.aml kernel/firmware/acpi
+- find kernel | cpio -H newc --create > acpi_initrd
+- cat /boot/initrd.img-4.15.0-54-generic >> acpi_initrd
+- mv acpi_initrd /boot/initrd.img-4.15.0-54-generic
+
+modify
+------
+http://backreference.org/2010/07/04/modifying-initrdinitramfs-files/
 
 
 file as /dev/sdb
