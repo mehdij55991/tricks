@@ -59,3 +59,7 @@ https://www.quora.com/How-do-I-enable-pr_debug-in-Linux-Kernel
 - search wanted file:line by "cat /sys/kernel/debug/dynamic_debug/control"
 - echo 'file drivers/dax/super.c line 178 +p' > control
 - check log at dmesg
+
+or
+
+- set printk loglevel to 8 (/proc/sys/kernel/printk)
