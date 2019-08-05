@@ -504,3 +504,9 @@ function sudo () {
   args="$@"
   /usr/bin/sudo bash -c "source env-file && $args"
 }
+
+
+find multiple patterns
+======================
+- find . \( -name "*.c" -o -name "*.h" -o -name "*.ic" -o -name "*.cc" \)
+- find . -iregex '.*\.\(c\|cc\|h\|ic\)$'
