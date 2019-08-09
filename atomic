@@ -1,3 +1,17 @@
+resources
+=========
+- official document (hard to read)
+  https://en.cppreference.com/w/cpp/atomic/memory_order
+- C/C++11 mappings to processors
+  https://www.cl.cam.ac.uk/~pes20/cpp/cpp0xmappings.html
+- Herb Sutter - atomic Weapons
+  https://www.youtube.com/watch?v=A8eCGOqgvH4
+  https://www.youtube.com/watch?v=KeLBd2EJLOU
+- Herb Sutter - lock free programming
+  https://www.youtube.com/watch?v=c1gO9aB9nbs
+  https://www.youtube.com/watch?v=CmxkPChOcvw
+
+
 compare & exchange (val)
 ========================
 
