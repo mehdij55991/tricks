@@ -510,3 +510,9 @@ find multiple patterns
 ======================
 - find . \( -name "*.c" -o -name "*.h" -o -name "*.ic" -o -name "*.cc" \)
 - find . -iregex '.*\.\(c\|cc\|h\|ic\)$'
+
+
+disable swap
+============
+sudo systemctl stop swapfile.swap
+sudo systemctl mask swapfile.swap
