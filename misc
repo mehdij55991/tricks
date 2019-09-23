@@ -48,8 +48,12 @@ gcc -march=native -Q --help=target
 
 ss
 ==
+server
+------
 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
-
+cient
+-----
+https://www.linuxbabe.com/ubuntu/shadowsocks-libev-proxy-server-ubuntu-16-04-17-10
 
 enable pr_debug
 ===============
