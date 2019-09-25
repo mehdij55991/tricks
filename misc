@@ -67,3 +67,9 @@ https://www.quora.com/How-do-I-enable-pr_debug-in-Linux-Kernel
 or
 
 - set printk loglevel to 8 (/proc/sys/kernel/printk)
+
+
+mysql authentication issue
+==========================
+[mysqld]
+default_authentication_plugin=mysql_native_password
