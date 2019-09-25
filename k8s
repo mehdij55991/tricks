@@ -53,3 +53,46 @@ container to container
 container veth -> veth in host bridge -> host routing -> flannel -> vxlan -> peer flannel
 -> peer host routing -> veth in peer host bridge -> peer container veth
 
+
+deploy
+======
+https://vitux.com/install-and-deploy-kubernetes-on-ubuntu/
+https://stackoverflow.com/questions/58024643/kubernetes-master-node-not-ready-state
+
+[master+node]
+$ sudo apt install docker.io
+# cat > /etc/docker/daemon.json <<EOF
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+
+$ mkdir -p /etc/systemd/system/docker.service.d
+$ systemctl daemon-reload
+$ systemctl restart docker
+
+$ sudo systemctl enable docker
+$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+$ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+$ sudo apt install kubeadm
+$ sudo sh -c 'kubectl completion bash >/etc/bash_completion.d/kubectl'
+$ sudo swapoff -a
+$ sudo sysctl net.bridge.bridge-nf-call-iptables=1
+
+
+[master]
+$ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+$ mkdir -p $HOME/.kube
+$ sudo cp /etc/kubernetes/admin.conf $HOME/.kube/config
+$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+// k8s 1.16 bug: "cniVersion": "0.2.0"
+$ sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+[node]
+$ sudo kubeadm join ....
