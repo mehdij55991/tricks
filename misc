@@ -73,3 +73,24 @@ mysql authentication issue
 ==========================
 [mysqld]
 default_authentication_plugin=mysql_native_password
+
+
+find
+====
+find specific files in current dir and subdir, but ignore some dirs
+$ find . \( -name "*.[hc]" -o -name "*.cc" \) -not -path "./build/*"
+$ find . \( -name "*.[hc]" -o -name "*.cc" -o -name "*.ic" \) \( -not -path "./output/*" -and -not -path "./.git/*" -and -not -path "./output-debug/*" \)
+
+
+cscope
+======
+- navigate system headers files
+  $ cscope `find /usr/include -type f` -f syshdr.out
+  $ cscope -f syshdr.out -d
+
+- generate db for specific files
+  $ cd mysql-server
+  $ cscope `find . \( -name "*.[hc]" -o -name "*.cc" -o -name "*.ic" \) \( -not -path "./output/*" -and -not -path "./.git/*" -and -not -path "./output-debug/*" \)`
+  $ mv cscope.out output/
+  $ cd output
+  $ cscope -d -P ..
