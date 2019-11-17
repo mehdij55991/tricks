@@ -21,7 +21,7 @@ if dein#load_state('/home/linux/.cache/dein')
 
   " Add or remove your plugins here like this:
   call dein#add('cyb70289/Zenburn')
-  call dein#add('vim-scripts/cscope.vim')
+  "call dein#add('vim-scripts/cscope.vim')
   call dein#add('Shougo/deoplete.nvim', {'on_i': 1})
   call dein#add('roxma/nvim-yarp', {'on_i': 1})
   call dein#add('roxma/vim-hug-neovim-rpc', {'on_i': 1})
