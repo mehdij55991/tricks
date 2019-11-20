@@ -100,3 +100,8 @@ qemu user
 ========
 - https://github.com/multiarch/qemu-user-static
 - https://ownyourbits.com/2018/06/13/transparently-running-binaries-from-any-architecture-in-linux-with-qemu-and-binfmt_misc/
+
+
+uefi
+====
+bcfg boot add 0 fs0:\EFI\ubuntu\grubaa64.efi ubuntu
