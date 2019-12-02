@@ -105,3 +105,8 @@ qemu user
 uefi
 ====
 bcfg boot add 0 fs0:\EFI\ubuntu\grubaa64.efi ubuntu
+
+
+https
+=====
+https://robertheaton.com/2014/03/27/how-does-https-actually-work/
