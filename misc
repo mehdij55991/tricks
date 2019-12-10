@@ -110,3 +110,9 @@ bcfg boot add 0 fs0:\EFI\ubuntu\grubaa64.efi ubuntu
 https
 =====
 https://robertheaton.com/2014/03/27/how-does-https-actually-work/
+
+
+gdb
+===
+- save history commands
+  echo 'set history save on' >> ~/.gdbinit && chmod 600 ~/.gdbinit
