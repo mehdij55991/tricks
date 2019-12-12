@@ -116,3 +116,10 @@ gdb
 ===
 - save history commands
   echo 'set history save on' >> ~/.gdbinit && chmod 600 ~/.gdbinit
+
+
+get cache size
+==============
+for i in $(find /sys/devices/system/cpu/cpu0/cache -type f ); do echo $i -- $(cat $i); done
+
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/ABI/testing/sysfs-devices-system-cpu
