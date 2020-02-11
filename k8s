@@ -96,3 +96,8 @@ $ sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/
 
 [node]
 $ sudo kubeadm join ....
+
+
+ignore prechecking error
+========================
+--extra-config=kubeadm.ignore-preflight-errors=SystemVerification
