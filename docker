@@ -110,3 +110,8 @@ $ docker manifest create --amend cyb70289/busybox cyb70289/busybox-amd64 cyb7028
 $ docker manifest annotate cyb70289/busybox cyb70289/busybox-amd64 --arch amd64 --os linux
 $ docker manifest annotate cyb70289/busybox cyb70289/busybox-arm64 --arch arm64 --os linux
 $ docker manifest push --purge cyb70289/busybox
+
+
+enable bind mount in docker
+===========================
+$ docker run --cap-add SYS_ADMIN --security-opt apparmor=unconfined ...
