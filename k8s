@@ -101,3 +101,8 @@ $ sudo kubeadm join ....
 ignore prechecking error
 ========================
 --extra-config=kubeadm.ignore-preflight-errors=SystemVerification
+
+
+minikube coredns crashloop
+==========================
+https://github.com/coredns/coredns/blob/master/plugin/loop/README.md
