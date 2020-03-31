@@ -524,3 +524,13 @@ disable swap
 ============
 sudo systemctl stop swapfile.swap
 sudo systemctl mask swapfile.swap
+
+
+fight with dns 127.0.0.53
+=========================
+cat /run/systemd/resolve/resolv.conf > /tmp/resolv.conf.real
+sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
+sudo rm -f /etc/resolv.conf
+sudo cp /tmp/resolv.conf.real /etc/resolv.conf
+sudo reboot
