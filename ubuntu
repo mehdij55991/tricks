@@ -534,3 +534,8 @@ sudo systemctl disable systemd-resolved
 sudo rm -f /etc/resolv.conf
 sudo cp /tmp/resolv.conf.real /etc/resolv.conf
 sudo reboot
+
+
+set locale
+==========
+export LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
