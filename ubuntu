@@ -539,3 +539,15 @@ sudo reboot
 set locale
 ==========
 export LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
+
+
+set memlock to unlimited
+========================
+add to /etc/security/limits.conf
+
+*               soft    memlock            unlimited
+*               hard    memlock            unlimited
+root            soft    memlock            unlimited
+root            hard    memlock            unlimited
+
+logout/login
