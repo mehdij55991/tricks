@@ -116,7 +116,8 @@ gdb
 ===
 - save history commands
   echo 'set history save on' >> ~/.gdbinit && chmod 600 ~/.gdbinit
-
+- skip stl headers in single step debugging
+  https://stackoverflow.com/a/42721326/6837980
 
 get cache size
 ==============
