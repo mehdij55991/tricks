@@ -1,0 +1,9 @@
+[user]
+	email = cyb70289@gmail.com
+	name = Yibo Cai
+[alias]
+	st = status
+	ck = checkout
+	br = branch
+[core]
+	editor = vim

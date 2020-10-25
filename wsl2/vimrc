@@ -1,0 +1,73 @@
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=/home/cyb/.cache/dein/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('/home/cyb/.cache/dein')
+  call dein#begin('/home/cyb/.cache/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('/home/cyb/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('cyb70289/Zenburn')
+  call dein#add('Shougo/deoplete.nvim', {'on_i': 1})
+  call dein#add('roxma/nvim-yarp', {'on_i': 1})
+  call dein#add('roxma/vim-hug-neovim-rpc', {'on_i': 1})
+  call dein#add('deoplete-plugins/deoplete-jedi', {'on_ft': 'python'})
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+let g:deoplete#enable_at_startup = 1
+
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+
+"End dein Scripts-------------------------
+
+" normal mode
+let &t_EI .= "\<Esc>[0 q"
+" insert mode
+let &t_SI .= "\<Esc>[6 q"
+
+set nocompatible
+set ruler
+set whichwrap=b,s,<,>,[,]
+set backspace=indent,eol,start
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set wrap
+set hlsearch
+set ignorecase smartcase
+set background=dark
+
+hi Comment ctermfg=blue
+syntax enable
+filetype indent plugin on
+
+map <F2> :set shiftwidth=4 tabstop=4 expandtab<CR>
+map <F3> :set shiftwidth=8 tabstop=8 noexpandtab<CR>
+map <F4> :nohlsearch<CR>
+
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\""
+
+autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
+
+set t_Co=256
+let g:zenburn_disable_Label_underline = 1
+colorscheme zenburn
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+autocmd InsertLeave * if pumvisible() == 0 | pclose
+set laststatus=1
+set completeopt-=preview

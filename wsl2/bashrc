@@ -1,0 +1,5 @@
+##########################################################################
+
+if ! pgrep ss-local > /dev/null; then nohup ss-local > /dev/null 2>&1 & fi
+
+cd ~

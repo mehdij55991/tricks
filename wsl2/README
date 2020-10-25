@@ -1,0 +1,46 @@
+install ubuntu offline
+----------------------
+- https://docs.microsoft.com/en-us/windows/wsl/install-manual
+- https://aka.ms/wslubuntu2004
+
+
+ubuntu install failed with error: 0x8007023e
+---------------------------------------------
+- control panel -> uninstall -> enable/close windows functions
+- de-select windows subsystem, virtual machine platform
+- reboot
+- select windows subsystem, virtual machine platform
+- reboot
+
+
+windows terminal
+----------------
+- add global settings
+    "theme": "dark",
+    "initialCols": 80,
+    "initialRows": 30,
+- install ubuntu fonts
+  * http://colhountech-linux.northeurope.cloudapp.azure.com/how-to-install-ubuntu-fonts-on-windows-10/
+  * download fonts from font.ubuntu.com
+  * install all ttf files
+- modify ubuntu profile settings
+            {
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "hidden": false,
+                "name": "Ubuntu-20.04",
+                "source": "Windows.Terminal.Wsl",
+                "colorScheme": "One Half Dark",
+                "fontFace": "Ubuntu Mono",
+                "fontSize": 13,
+                "cursorShape": "filledBox"
+            }
+- disable ctrl-v
+  // { "command": "paste", "keys": "ctrl+v" },
+
+
+fix 'all windows files executable'
+----------------------------------
+- create /etc/wsl.conf, reboot
+[automount]
+enabled = true
+options = "metadata,umask=022,fmask=111"
