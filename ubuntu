@@ -556,3 +556,9 @@ logout/login
 hide desktop drive icon
 =======================
 gsettings set org.gnome.nautilus.desktop volumes-visible 'false'
+
+
+gnome terminal color theme
+==========================
+https://mayccoll.github.io/Gogh/
+[Teerb]
