@@ -129,3 +129,11 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Document
 pre-defined compiler macros
 ===========================
 https://sourceforge.net/p/predef/wiki/Architectures/
+
+
+github proxy
+============
+append to ~/.ssh/config
+Host github.com
+	User git
+	ProxyCommand nc -x localhost:8051 %h %p
