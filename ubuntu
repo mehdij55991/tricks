@@ -558,7 +558,11 @@ hide desktop drive icon
 gsettings set org.gnome.nautilus.desktop volumes-visible 'false'
 
 
-gnome terminal color theme
-==========================
-https://mayccoll.github.io/Gogh/
-[Teerb]
+gnome terminal
+==============
+- color theme
+  https://mayccoll.github.io/Gogh/
+  [Teerb]
+
+- windows size shrink
+  dconf write /org/gnome/terminal/legacy/headerbar '@mb false'
