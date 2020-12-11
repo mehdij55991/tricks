@@ -120,3 +120,13 @@ $ docker run --cap-add SYS_ADMIN --security-opt apparmor=unconfined ...
 docker in docker
 ================
 -v /var/run/docker.sock:/var/run/docker.sock
+
+
+alpine build hangs
+==================
+https://github.com/gliderlabs/docker-alpine/issues/307#issuecomment-721636132
+add to /etc/docker/daemon
+# mtu size depends on network
+{
+  "mtu": 1450
+}
