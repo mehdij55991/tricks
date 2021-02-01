@@ -106,3 +106,8 @@ ignore prechecking error
 minikube coredns crashloop
 ==========================
 https://github.com/coredns/coredns/blob/master/plugin/loop/README.md
+
+
+hugepage sysfs
+==============
+echo 2147483648 > /sys/fs/cgroup/hugetlb/kubepods/hugetlb.2MB.limit_in_bytes
