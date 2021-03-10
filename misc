@@ -137,3 +137,9 @@ append to ~/.ssh/config
 Host github.com
 	User git
 	ProxyCommand nc -x localhost:8051 %h %p
+
+
+vim copy more than 50 lines
+===========================
+:set viminfo-=<50,s10
+https://stackoverflow.com/questions/3676855/vim-limited-line-memory
