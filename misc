@@ -154,3 +154,8 @@ URL=https://dl.google.com/go/
 GOPKG=go${GOVERSION}.linux-${ARCH}.tar.gz
 curl -sL ${URL}/${GOPKG} | sudo tar -C /usr/local -xzf -
 export PATH=${PATH}:/usr/local/go/bin
+
+
+Modify other's PR
+=================
+https://tighten.co/blog/adding-commits-to-a-pull-request/
