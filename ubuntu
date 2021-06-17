@@ -566,3 +566,9 @@ gnome terminal
 
 - windows size shrink
   dconf write /org/gnome/terminal/legacy/headerbar '@mb false'
+
+
+background solid color
+======================
+$ gsettings set org.gnome.desktop.background picture-uri ""
+$ gsettings set org.gnome.desktop.background primary-color '#0063b1'
