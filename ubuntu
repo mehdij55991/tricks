@@ -586,3 +586,9 @@ $ gsettings --schemadir schemas set org.gnome.shell.extensions.dash-to-dock show
 nofitication area missing
 =========================
 sudo apt install gnome-shell-extension-appindicator
+
+
+install python3.8 if on ubuntu 18.04
+====================================
+$ add-apt-repository ppa:deadsnakes/ppa
+$ apt install -y python3.8 python3.8-distutils
