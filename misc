@@ -159,3 +159,10 @@ export PATH=${PATH}:/usr/local/go/bin
 Modify other's PR
 =================
 https://tighten.co/blog/adding-commits-to-a-pull-request/
+
+
+output redirection on ssh-ed host
+=================================
+# echo 3 > /proc/sys/vm/drop_caches
+echo 3 | ssh remote-host sudo tee /proc/sys/vm/drop_caches
+
