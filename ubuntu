@@ -161,6 +161,10 @@ https://github.com/Ericsson/exchangecalendar/wiki/How-to-Add-Your-Calendar-to-Th
 - https://github.com/ExchangeCalendar/exchangecalendar
 
 
+thunderbird
+===========
+mailnews.display.disable_format_flowed_support = true
+
 
 set tab title
 =============
