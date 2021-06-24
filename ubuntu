@@ -350,12 +350,11 @@ git -c "http.proxy=socks5://localhost:3333" clone https://github.com/pytorch/pyt
 resize partition
 ================
 - fix gpt error
-  $ sudo parted -l
+  # printf "fix\n" | parted ---pretend-input-tty /dev/sda print
 - grow partition
-  $ sudo apt install cloud-utils
-  $ sudo growpart /dev/sda 2
+  # growpart /dev/sda 2
 - grow file system
-  $ sudo resize2fs /dev/sda2
+  # resize2fs /dev/sda2
 
 
 ssh tunnel
