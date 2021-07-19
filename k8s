@@ -106,6 +106,10 @@ ignore prechecking error
 minikube coredns crashloop
 ==========================
 https://github.com/coredns/coredns/blob/master/plugin/loop/README.md
+$ cp /run/systemd/resolve/resolv.conf /tmp
+$ sudo systemctl stop systemd-resolved
+$ sudo systemctl disable systemd-resolved
+$ sudo mv /tmp/resolv.conf /etc/resolv.conf
 
 
 hugepage sysfs
