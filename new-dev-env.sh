@@ -18,10 +18,13 @@ sudo update-alternatives --set editor /usr/bin/vim.basic
 
 echo
 echo === To install docker ====================================================
-echo ~/dockerfiles/dev/base/helper/install-docker.sh all
+echo ~/dockerfiles/dev/base/helper/install-docker.sh "all|client"
 echo
 echo === To install golang ====================================================
 echo ~/dockerfiles/dev/base/helper/install-golang.sh [version]
+echo
+echo === To develope k8s ======================================================
+echo ~/dockerfiles/dev/base/helper/init-k8s-dev.sh
 echo
 echo === To build dev docker ==================================================
 echo mkdir -p ~/share
