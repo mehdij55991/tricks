@@ -1,0 +1,2 @@
+# vmip domain
+echo $(virsh domifaddr $1 | grep vnet | awk '{print $4}' | sed 's:/.*::g')
