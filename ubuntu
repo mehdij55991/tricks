@@ -595,3 +595,9 @@ install python3.8 if on ubuntu 18.04
 ====================================
 $ add-apt-repository ppa:deadsnakes/ppa
 $ apt install -y python3.8 python3.8-distutils
+
+
+search 64k page size arm64 kernel
+=================================
+sudo apt install linux-generic-64k-hwe-20.04
+apt search "linux-.*64k"
