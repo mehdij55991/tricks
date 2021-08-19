@@ -1,2 +1,10 @@
-# vmip domain
-echo $(virsh domifaddr $1 | grep vnet | awk '{print $4}' | sed 's:/.*::g')
+# vmip [domain1] [domain2]
+if [ $# -ge 1 ]; then
+    DOMAINS=$*
+else
+    DOMAINS=$(virsh list | awk 'NR>2 {print $2}')
+fi
+for VM in ${DOMAINS}; do
+    IP=$(virsh domifaddr ${VM} | grep vnet | awk '{print $4}' | sed 's:/.*::g')
+    echo $VM: $IP
+done
