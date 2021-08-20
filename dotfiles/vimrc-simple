@@ -25,3 +25,5 @@ autocmd Filetype java setlocal sw=2 ts=2 expandtab
 set t_Co=256
 let g:zenburn_disable_Label_underline = 1
 "colorscheme zenburn
+
+set viminfo-=<50,s10
