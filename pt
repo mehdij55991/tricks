@@ -1,0 +1,36 @@
+#!/bin/bash -e
+
+tmphost=${TMPHOST:-cyb@wls-x86-hp07.shanghai.arm.com}
+
+usage() {
+    echo "Usage:"
+    echo "    pt push project [commits=1]"
+    echo "    pt pull project"
+    exit 1
+}
+
+if [ $# -lt 2 ]; then
+    usage
+fi
+
+cmd=$1
+prj=$2
+commits=${3:-1}
+
+tmpdir=/tmp/__pt__/${prj}
+if [ ${cmd} == push ]; then
+    pushdir=/tmp/__pt_push__/${prj}
+    mkdir -p ${pushdir} && rm -f ${pushdir}/0*.patch
+    ssh ${tmphost} "mkdir -p ${tmpdir} && rm -f ${tmpdir}/0*.patch"
+    git format-patch HEAD~${commits} -o ${pushdir}
+    scp ${pushdir}/0*.patch ${tmphost}:${tmpdir}
+elif [ ${cmd} == pull ]; then
+    pulldir=/tmp/__pt_pull__/${prj}
+    mkdir -p ${pulldir} && rm -f ${pulldir}/0*.patch
+    scp ${tmphost}:${tmpdir}/0*.patch ${pulldir}
+    for f in ${pulldir}/0*.patch; do
+        git am $f
+    done
+else
+    usage
+fi
