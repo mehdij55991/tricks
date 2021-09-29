@@ -170,3 +170,13 @@ echo 3 | ssh remote-host sudo tee /proc/sys/vm/drop_caches
 disable cpu frequency scaling
 =============================
 cpupower frequency-set -g performance
+
+
+set optimization level
+======================
+#pragma GCC push_options
+#pragma GCC optimize(2)
+void f() {}
+#pragma GCC pop_options
+
+__attribute__ ((optimize(3))) void f() {}
