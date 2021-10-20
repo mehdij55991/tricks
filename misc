@@ -187,3 +187,9 @@ list compiler predefined macros
 gcc -dM -E -x c /dev/null
 gcc -dM -E -O3 -x c++ /dev/null
 cl /EP /Zc:preprocessor /PD empty.cpp 2>nul
+
+
+clang on windows: undefined symbol __divti3
+===========================================
+clang --rtlib=compiler-rt test.c
+clang-cl /clang:"--rtlib=compiler-rt" test.c
