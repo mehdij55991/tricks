@@ -1,94 +1,92 @@
-" https://github.com/Shougo/dein.vim
-" https://github.com/Shougo/deoplete.nvim
-" https://github.com/deoplete-plugins/deoplete-jedi
-" https://github.com/deoplete-plugins/deoplete-go
-" https://github.com/mdempsky/gocode
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" vim +PlugInstall +qa
 
-if &compatible
-  set nocompatible               " Be iMproved
+" https://github.com/prabirshrestha/vim-lsp
+call plug#begin('~/.vim/plugged')
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'cyb70289/Zenburn'
+call plug#end()
+let g:lsp_diagnostics_enabled = 0
+let g:lsp_document_highlight_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+nmap <buffer> gd <plug>(lsp-definition)
+nmap <buffer> pd <plug>(lsp-peek-definition)
+nmap <buffer> gh <plug>(lsp-hover)
+nmap <buffer> gr <plug>(lsp-references)
+
+" https://github.com/prabirshrestha/vim-lsp/wiki
+if executable('clangd')
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'clangd',
+    \ 'cmd': {server_info->['clangd', '-background-index']},
+    \ 'whitelist': ['c', 'cpp', 'cc', 'C'],
+    \ })
+endif
+if executable('gopls')
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'gopls',
+    \ 'cmd': {server_info->['gopls']},
+    \ 'whitelist': ['go'],
+    \ })
+  let g:lsp_format_sync_timeout = 2000
+  autocmd BufWritePre *.go LspDocumentFormatSync
 endif
 
-"" Required:
-set runtimepath+=/home/linux/.cache/dein/repos/github.com/Shougo/dein.vim
+" https://github.com/prabirshrestha/asyncomplete.vim
+" tab to pop and select autocompletions, c-v tab to insert a real tab
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+let g:asyncomplete_auto_popup = 0
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Required:
-if dein#load_state('/home/linux/.cache/dein')
-  call dein#begin('/home/linux/.cache/dein')
-
-  " Let dein manage dein
-  " Required:
-  call dein#add('/home/linux/.cache/dein/repos/github.com/Shougo/dein.vim')
-
-  " Add or remove your plugins here like this:
-  call dein#add('cyb70289/Zenburn')
-  "call dein#add('vim-scripts/cscope.vim')
-  call dein#add('Shougo/deoplete.nvim', {'on_i': 1})
-  call dein#add('roxma/nvim-yarp', {'on_i': 1})
-  call dein#add('roxma/vim-hug-neovim-rpc', {'on_i': 1})
-  call dein#add('deoplete-plugins/deoplete-jedi', {'on_ft': 'python'})
-  call dein#add('deoplete-plugins/deoplete-go', {'build':'make', 'on_ft':'go'})
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
-
-" Required:
-filetype plugin indent on
-syntax enable
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-
-let g:deoplete#enable_at_startup = 1
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+set nocompatible
 set ruler
 set whichwrap=b,s,<,>,[,]
 set backspace=indent,eol,start
-set shiftwidth=4 tabstop=4 expandtab
-set wrap hlsearch noincsearch ignorecase smartcase
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set wrap
+set hlsearch
+set ignorecase smartcase
+set background=dark
 
+hi Comment ctermfg=blue
+syntax enable
+filetype indent plugin on
+
+map <F2> :set shiftwidth=4 tabstop=4 expandtab<CR>
+map <F3> :set shiftwidth=8 tabstop=8 noexpandtab<CR>
+map <F4> :nohlsearch<CR>
+
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\""
+
+set t_Co=256
 let g:zenburn_disable_Label_underline = 1
 colorscheme zenburn
 
-" auto completion
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"inoremap qq <C-O>:pc<CR>
-autocmd InsertLeave * if pumvisible() == 0 | pclose
-set laststatus=1
-set completeopt-=preview
+" per file type configuration
+autocmd Filetype java setlocal sw=2 ts=2 expandtab
+autocmd Filetype cpp setlocal sw=2 ts=2 expandtab
+autocmd BufNewFile,BufRead *.make set tabstop=4 shiftwidth=4 noexpandtab
+"autocmd BufNewFile,BufRead *.ic set syntax=cpp
 
-" save last position
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\""
-
-" key mappings
-nnoremap <F2> :set shiftwidth=4 tabstop=4 expandtab<CR>
-nnoremap <F3> :set shiftwidth=8 tabstop=8 noexpandtab<CR>
-nnoremap <F4> :nohlsearch<CR>
-
-" cscope key mappings
-nnoremap <leader>fa :call cscope#findInteractive(expand('<cword>'))<CR>
-nnoremap <leader>l :call ToggleLocationList()<CR>
-" g: Find this definition
-nnoremap <leader>fg :call cscope#find('g', expand('<cword>'))<CR>
-" s: Find this C symbol
-nnoremap <leader>fs :call cscope#find('s', expand('<cword>'))<CR>
-" c: Find functions calling this function
-nnoremap <leader>fc :call cscope#find('c', expand('<cword>'))<CR>
+" per directory configuration
+"autocmd BufNewFile,BufRead /home/linux/work/spdk/* set tabstop=8 shiftwidth=8 noexpandtab
 
 " don't auto insert comment mark
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 
-" per directory configuration
-autocmd BufNewFile,BufRead /home/linux/work/spdk/* set tabstop=8 shiftwidth=8 noexpandtab
-
-" enable .vimrc per directory
-set exrc
-set secure
-
+" yank more than 50 lines
 set viminfo-=<50,s10
