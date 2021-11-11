@@ -12,6 +12,8 @@ let g:lsp_diagnostics_enabled = 0
 let g:lsp_document_highlight_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
 nmap <buffer> gd <plug>(lsp-definition)
+nmap <buffer> -gd :sp<cr>:LspDefinition<cr>
+nmap <buffer> \gd :vsp<cr>:LspDefinition<cr>
 nmap <buffer> pd <plug>(lsp-peek-definition)
 nmap <buffer> gh <plug>(lsp-hover)
 nmap <buffer> gr <plug>(lsp-references)
