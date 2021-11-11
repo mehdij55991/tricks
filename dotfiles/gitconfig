@@ -1,0 +1,16 @@
+[color]
+	ui = auto
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[user]
+	name = Yibo Cai
+[alias]
+	st = status
+	br = branch
+	ck = checkout
+[push]
+	default = simple
+[diff]
+	renames = copies
