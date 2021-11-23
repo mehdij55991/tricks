@@ -23,7 +23,7 @@ if executable('clangd')
   au User lsp_setup call lsp#register_server({
     \ 'name': 'clangd',
     \ 'cmd': {server_info->['clangd', '-background-index']},
-    \ 'whitelist': ['c', 'cpp', 'cc', 'C'],
+    \ 'whitelist': ['c', 'cpp'],
     \ })
 endif
 if executable('gopls')
@@ -34,6 +34,13 @@ if executable('gopls')
     \ })
   let g:lsp_format_sync_timeout = 2000
   autocmd BufWritePre *.go LspDocumentFormatSync
+endif
+if executable('pyls')
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'pyls',
+    \ 'cmd': {server_info->['pyls']},
+    \ 'whitelist': ['python'],
+    \ })
 endif
 
 " https://github.com/prabirshrestha/asyncomplete.vim
