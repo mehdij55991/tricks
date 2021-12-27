@@ -193,3 +193,9 @@ clang on windows: undefined symbol __divti3
 ===========================================
 clang --rtlib=compiler-rt test.c
 clang-cl /clang:"--rtlib=compiler-rt" test.c
+
+
+ipmi
+====
+ipmitool -H <host> -I lanplus -U <user> -P <pass> chassis power on/off/status
+ipmitool -H <host> -I lanplus -U <user> -P <pass> sol activate/deactivate
