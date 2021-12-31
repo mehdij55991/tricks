@@ -28,15 +28,31 @@ baseline=$5
 suite_filter=$6
 benchmark_filter=${7:-".*"}
 
-ssh cyb@${host} \
-    "sudo docker run -t --rm cyb-dev-arrow \
-     bash -e -c \
-         'source /home/cyb/venv/bin/activate;
-          git clone ${url} arrow-bench; cd arrow-bench; \
-          git branch ${contender} origin/${contender} 2>/dev/null || :; \
-          git branch ${baseline} origin/${baseline} 2>/dev/null || :; \
-          pip install -e dev/archery; \
-          archery benchmark diff ${contender} ${baseline} \
-               --suite-filter=${suite_filter} \
-               --benchmark-filter=${benchmark_filter} \
-               --cc=${cc} --cxx=${cxx}'"
+if [[ $host =~ wls-arm-m1.* ]]; then
+    ssh cyb@${host} \
+        "bash -e -c \
+             'export PATH=/opt/homebrew/bin:/Users/cyb/miniforge3/bin:\$PATH; \
+              source /Users/cyb/miniforge3/etc/profile.d/conda.sh; \
+              conda activate venv; \
+              rm -rf /tmp/__arrow-bench; \
+              git clone ${url} /tmp/__arrow-bench; cd /tmp/__arrow-bench; \
+              git branch ${contender} origin/${contender} 2>/dev/null || :; \
+              git branch ${baseline} origin/${baseline} 2>/dev/null || :; \
+              CONDA_PREFIX= archery benchmark diff ${contender} ${baseline} \
+                   --suite-filter=${suite_filter} \
+                   --benchmark-filter=${benchmark_filter} \
+                   --cc=${cc} --cxx=${cxx}'"
+else
+    ssh cyb@${host} \
+        "sudo docker run -t --rm cyb-dev-arrow \
+         bash -e -c \
+             'source /home/cyb/venv/bin/activate;
+              git clone ${url} arrow-bench; cd arrow-bench; \
+              git branch ${contender} origin/${contender} 2>/dev/null || :; \
+              git branch ${baseline} origin/${baseline} 2>/dev/null || :; \
+              pip install -e dev/archery; \
+              archery benchmark diff ${contender} ${baseline} \
+                   --suite-filter=${suite_filter} \
+                   --benchmark-filter=${benchmark_filter} \
+                   --cc=${cc} --cxx=${cxx}'"
+fi
