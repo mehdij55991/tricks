@@ -98,9 +98,10 @@ cscope
 
 qemu user
 ========
-- https://github.com/multiarch/qemu-user-static
-- https://ownyourbits.com/2018/06/13/transparently-running-binaries-from-any-architecture-in-linux-with-qemu-and-binfmt_misc/
-
+- https://www.ecliptik.com/Cross-Building-and-Running-Multi-Arch-Docker-Images/
+- steps
+  $ sudo apt install qemu-user-static binfmt-support
+  $ docker run -it --rm -v /usr/bin/qemu-s390x-static:/usr/bin/qemu-s390x-static multiarch/ubuntu-core:s390x-focal
 
 uefi
 ====
