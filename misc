@@ -185,6 +185,26 @@ void f() {}
 __attribute__ ((optimize(3))) void f() {}
 
 
+disable loop vectorize for specific code
+========================================
+clang
+-----
+void f() {
+  #pragma clang loop vectorize(disable)
+  for (int i = 0; i < n; ++i) { ... }
+}
+
+gcc
+---
+#pragma GCC push_options
+#pragma GCC optimize("no-tree-vectorize")
+void f() { ... }
+#pragma GCC pop_options
+
+__attribute__((optimize("no-tree-vectorize")))
+void f() { .... }
+
+
 list compiler predefined macros
 ===============================
 gcc -dM -E -x c /dev/null
