@@ -152,17 +152,16 @@ Explanation:
 ?excluding index.html files (-R index.html*)
 
 
-outlook
-=======
-https://computing.artsci.wustl.edu/help/o365/thunderbird (sendmail: smtp.office365.com)
-https://github.com/Ericsson/exchangecalendar/wiki/How-to-Add-Your-Calendar-to-Thunderbird
-
-- sudo apt install xul-ext-lightning
-- https://github.com/ExchangeCalendar/exchangecalendar
-
-
 thunderbird
 ===========
+
+office365
+---------
+email: select imap+oauth2, works out of the box
+calendar: install TbSync + "Provider for Exchange ActiveSync"
+
+dont wrap long line
+-------------------
 mailnews.display.disable_format_flowed_support = true
 
 
