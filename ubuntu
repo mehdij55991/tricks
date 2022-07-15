@@ -600,3 +600,22 @@ search 64k page size arm64 kernel
 =================================
 sudo apt install linux-generic-64k-hwe-20.04
 apt search "linux-.*64k"
+
+
+install arm64 packges on x86_64
+===============================
+- prefer https://github.com/multiarch/qemu-user-static
+
+- https://wiki.debian.org/Multiarch/HOWTO#Setting_up_apt_sources
+  sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+  (
+    (grep ^deb /etc/apt/sources.list | sed 's/deb /deb [arch=amd64] /') && \
+    (grep ^deb /etc/apt/sources.list | sed 's/deb /deb [arch=arm64] /g; s/\(archive\|security\)\.ubuntu/ports.ubuntu/g; s/\/ubuntu/\/ubuntu-ports/g') \
+  ) | tee /tmp/sources.list
+  sudo mv /tmp/sources.list /etc/apt/sources.list
+  sudo dpkg --add-architecture arm64
+  sudo apt update
+  sudo apt install libc6:arm64 libstdc++6:arm64
+
+- https://wiki.debian.org/QemuUserEmulation
+  sudo apt install qemu binfmt-support qemu-user-static
