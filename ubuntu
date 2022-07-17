@@ -619,3 +619,8 @@ install arm64 packges on x86_64
 
 - https://wiki.debian.org/QemuUserEmulation
   sudo apt install qemu binfmt-support qemu-user-static
+
+
+find peak RSS of a process
+==========================
+/usr/bin/time command
