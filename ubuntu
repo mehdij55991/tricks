@@ -472,8 +472,10 @@ upstream
 - own build
   $ sudo apt install build-essential flex bison libncurses5-dev libssl-dev
   $ cp /boot/config-5.0.0-17-generic .config
-  $ make oldconfig
-  $ make -j32 LOCALVERSION=-pmem
+  $ make olddefconfig
+  $ sed -i 's/CONFIG_SYSTEM_TRUSTED_KEYS=.*/CONFIG_SYSTEM_TRUSTED_KEYS=""/' .config
+  $ sed -i 's/CONFIG_SYSTEM_REVOCATION_KEYS=.*/CONFIG_SYSTEM_REVOCATION_KEYS=""/' .config
+  $ make -j32 LOCALVERSION=-pmem deb-pkg
   $ sudo make modules_install
   $ sudo make install
 
