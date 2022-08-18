@@ -43,7 +43,7 @@ hugepage
 
 gcc arch details
 ================
-gcc -march=native -Q --help=target
+gcc -march=native -Q --help=target | grep march
 
 
 ss
