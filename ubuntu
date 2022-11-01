@@ -626,3 +626,11 @@ install arm64 packges on x86_64
 find peak RSS of a process
 ==========================
 /usr/bin/time command
+
+
+install latest clang
+====================
+curl -s https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+sudo apt-add-repository "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main"
+sudo apt update
+sudo apt install clang-13
