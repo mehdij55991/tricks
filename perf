@@ -21,6 +21,7 @@ ps
 - current code: cat stack
 - waiting: cat wchan
 - sched: cat sched
+- fdinfo/<fd>/flags: file open flags (O_DIRECT, ...)
 
 
 dd
@@ -68,6 +69,12 @@ $ sudo perf probe -x /lib/aarch64-linux-gnu/libc-2.27.so -V malloc
 $ sudo perf probe -x /lib/aarch64-linux-gnu/libc-2.27.so -a 'malloc bytes'
 $ sudo perf stat -e probe_libc:malloc ls
 $ sudo perf probe -d probe_libc:malloc
+
+
+lsof
+====
+- show file open flags (O_DIRECT, ...)
+  * lsof +fg file-name
 
 
 others
