@@ -196,8 +196,8 @@ void f() {
   for (int i = 0; i < n; ++i) { ... }
 }
 
-gcc
----
+gcc pragma
+----------
 #pragma GCC push_options
 #pragma GCC optimize("no-tree-vectorize")
 void f() { ... }
@@ -224,3 +224,16 @@ ipmi
 ====
 ipmitool -H <host> -I lanplus -U <user> -P <pass> chassis power on/off/status
 ipmitool -H <host> -I lanplus -U <user> -P <pass> sol activate/deactivate
+
+
+check enabled optimizations per '-O?'
+====================================
+https://stackoverflow.com/a/15548189/6837980
+$ gcc -Q -O2 --help=optimizers
+$ llvm-as-12 < /dev/null | opt-12 -O2 -disable-output -debug-pass=Arguments
+
+
+list compiler predefined macros
+===============================
+$ echo "int;" | gcc -dM -E -
+$ echo "int;" | clang -dM -E -
