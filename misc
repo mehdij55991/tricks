@@ -237,3 +237,13 @@ list compiler predefined macros
 ===============================
 $ echo "int;" | gcc -dM -E -
 $ echo "int;" | clang -dM -E -
+
+
+tcsh set locale
+===============
+- list all locale
+  > locale -a
+- check current locale
+  > locale charmap
+- change locale
+  > setenv LC_ALL en_US.utf8
