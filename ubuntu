@@ -397,6 +397,11 @@ curl & run script
 https://stackoverflow.com/questions/4642915/passing-parameters-to-bash-when-executing-a-script-fetched-by-curl
 
 
+curl & extract
+==============
+curl -sL https://aaa.bbb//ccc.tar.gz | tar xz
+
+
 gpg
 ===
 - create key
