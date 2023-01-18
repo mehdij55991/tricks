@@ -639,3 +639,8 @@ curl -s https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
 sudo apt-add-repository "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main"
 sudo apt update
 sudo apt install clang-13
+
+
+ssh issue on ubuntu-22.04
+=========================
+append "PubkeyAcceptedKeyTypes +ssh-rsa" to /etc/ssh/ssh_config
