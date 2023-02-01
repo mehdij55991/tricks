@@ -644,3 +644,8 @@ sudo apt install clang-13
 ssh issue on ubuntu-22.04
 =========================
 append "PubkeyAcceptedKeyTypes +ssh-rsa" to /etc/ssh/ssh_config
+
+
+iotop doesn't show IO
+=====================
+sudo sysctl -w kernel.task_delayacct=1
