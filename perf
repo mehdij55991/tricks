@@ -85,3 +85,8 @@ https://jvns.ca/blog/2017/07/05/linux-tracing-systems/
 simulate slow hard disk
 =======================
 https://serverfault.com/questions/523509/linux-how-to-simulate-hard-disk-latency-i-want-to-increase-iowait-value-withou
+
+
+list socket buffer size
+=======================
+ss -x -m | grep mysql
