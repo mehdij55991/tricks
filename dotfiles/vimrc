@@ -70,6 +70,7 @@ set wrap
 set hlsearch
 set ignorecase smartcase
 set background=dark
+set mouse=a
 
 hi Comment ctermfg=blue
 syntax enable
