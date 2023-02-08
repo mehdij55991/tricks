@@ -649,3 +649,8 @@ append "PubkeyAcceptedKeyTypes +ssh-rsa" to /etc/ssh/ssh_config
 iotop doesn't show IO
 =====================
 sudo sysctl -w kernel.task_delayacct=1
+
+
+get primary ip
+==============
+hostname -I | awk '{print $1}'
