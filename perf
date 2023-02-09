@@ -75,6 +75,8 @@ lsof
 ====
 - show file open flags (O_DIRECT, ...)
   * lsof +fg file-name
+- show unix socks used by a process
+  * lsof -a -U -p `pgrep myprocess`
 
 
 others
