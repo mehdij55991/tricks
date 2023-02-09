@@ -97,3 +97,8 @@ ss -x -m | grep mysql
 show cpu speed
 ==============
 sudo dmidecode -t processor | grep Hz
+
+
+test network latency
+====================
+qperf server-ip --msg_size 20 tcp_bw tcp_lat
