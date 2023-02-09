@@ -90,3 +90,8 @@ https://serverfault.com/questions/523509/linux-how-to-simulate-hard-disk-latency
 list socket buffer size
 =======================
 ss -x -m | grep mysql
+
+
+show cpu speed
+==============
+sudo dmidecode -t processor | grep Hz
