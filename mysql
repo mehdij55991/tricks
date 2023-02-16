@@ -1,0 +1,53 @@
+https://www.percona.com/blog/deep-dive-into-mysqls-performance-schema/
+
+
+engine status
+-------------
+show engine innodb status;
+
+
+list config vars
+----------------
+show variables;
+show variables like '%spin%';
+set @innodb_spin_wait_pause_multiplier = 5;
+
+
+list tables in current db
+-------------------------
+use performance_schema;
+show tables;
+show tables like '%summary%';
+
+
+show table structure
+--------------------
+show create table performance_schema.setup_consumers\G
+show columns from performance_schema.setup_consumers\G
+
+setup instruments
+-----------------
+select name, enabled from setup_instruments where name like 'wait/%';
+update setup_instruments set enabled='YES', timed='YES' where name like 'wait/%';
+
+
+setup consumers
+---------------
+select * from setup_consumers;
+update setup_consumers set enabled='YES' where name like '%wait%';
+
+
+check wait events
+-----------------
+select thread_id,event_name,source,timer_wait,operation from events_waits_current order by timer_wait;
+select thread_id,event_name,source,timer_wait,operation from events_waits_history order by timer_wait;
+
+select event_name,count_star,sum_timer_wait from events_waits_summary_global_by_event_name order by sum_timer_wait,count_star;
+select event_name,count_star,sum_timer_wait from events_waits_summary_global_by_event_name where event_name like "%rw%lock%" order by sum_timer_wait,count_star;
+
+select event_name,count_star,sum_timer_wait from events_waits_summary_by_instance order by sum_timer_wait,count_star;
+
+
+show thread info per thread_id
+------------------------------
+select name,thread_os_id from threads where thread_id=40
