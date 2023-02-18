@@ -51,3 +51,12 @@ select event_name,count_star,sum_timer_wait from events_waits_summary_by_instanc
 show thread info per thread_id
 ------------------------------
 select name,thread_os_id from threads where thread_id=40
+
+
+purge buffer pool
+-----------------
+https://www.cnblogs.com/geaozhang/p/7225340.html
+# page cleaners (4 for oltp)
+show global variables like '%page_cleaner%';
+# wait due to buffer pool used up and not cleaned in time
+show global status like '%buffer%wait_free%';
