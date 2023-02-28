@@ -247,3 +247,8 @@ tcsh set locale
   > locale charmap
 - change locale
   > setenv LC_ALL en_US.utf8
+
+
+init dev
+========
+bash <(curl -sL https://raw.githubusercontent.com/cyb70289/tricks/master/dotfiles/init-dev.sh)
