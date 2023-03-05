@@ -60,3 +60,10 @@ https://www.cnblogs.com/geaozhang/p/7225340.html
 show global variables like '%page_cleaner%';
 # wait due to buffer pool used up and not cleaned in time
 show global status like '%buffer%wait_free%';
+
+
+reduce disk write
+-----------------
+https://support.huaweicloud.com/bestpractice-rds/rds_02_0010.html
+- innodb_flush_log_at_trx_commit
+- sync_binlog
