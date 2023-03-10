@@ -77,6 +77,8 @@ lsof
   * lsof +fg file-name
 - show unix socks used by a process
   * lsof -a -U -p `pgrep myprocess`
+- show process uses socket port
+  * lsof -i :8080 -P
 
 
 others
