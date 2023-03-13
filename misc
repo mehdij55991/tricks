@@ -258,3 +258,10 @@ gcc keep frame pointer
 ======================
 -fno-omit-frame-pointer
 -mno-omit-leaf-frame-pointer
+
+
+run gui in docker
+=================
+docker run -it --rm --net host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix ubuntu:22.04 bash
+
+in container: copy host:~/.Xauthority to /root/.Xauthority
