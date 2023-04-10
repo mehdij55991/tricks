@@ -1,0 +1,4 @@
+get queue size
+--------------
+sudo nvme get-feature /dev/nvme5 -f 7
+get-feature:0x7 (Number of Queues), Current value:0x1f001f
