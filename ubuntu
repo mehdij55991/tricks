@@ -441,6 +441,7 @@ genisoimage -r -V "Estuary Ubuntu Install CD" -J -l -o ubuntu-4.12.iso ./ubuntu1
 kernel
 ======
 - source
+  sudo apt install linux-source (extract bz manually under /usr/src/linux-xxx)
   https://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/disco
   git://kernel.ubuntu.com/ubuntu/ubuntu-disco
 - changelog
