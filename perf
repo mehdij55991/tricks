@@ -104,3 +104,11 @@ sudo dmidecode -t processor | grep Hz
 test network latency
 ====================
 qperf server-ip --msg_size 20 tcp_bw tcp_lat
+
+
+kprobe
+======
+perf probe -L zap_pte_range
+perf probe -V zap_pte_range:56
+perf probe -a 'zap_pte_range:56 page->_mapcount'
+perf record -e probe:zap_pte_range_2 -g --filter '_mapcount > 0xffff' -- ./dax
