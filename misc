@@ -170,9 +170,13 @@ output redirection on ssh-ed host
 echo 3 | ssh remote-host sudo tee /proc/sys/vm/drop_caches
 
 
-disable cpu frequency scaling
-=============================
-cpupower frequency-set -g performance
+set cpu frequency
+=================
+sudo cpupower frequency-set -g performance
+sudo cpupower -c 79 frequency-set --max 3GHz
+cpupower -c 79 frequency-info
+sudo cpufreq-set -c 1 -u 2.8GHz
+cpufreq-info -c 1
 
 echo performance | sudo sh -c 'tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
 
