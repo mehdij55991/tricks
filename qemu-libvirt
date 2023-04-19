@@ -40,3 +40,8 @@ add nvme device to libvirt xml
 ==============================
 $ virt-xml cyb-spdkcsi-dev --edit --confirm --qemu-commandline='-drive file=/home/cyb/vm-dev/_output/nvme1.img,format=raw,if=none,id=NVME1'
 $ virt-xml cyb-spdkcsi-dev --edit --confirm --qemu-commandline='-device nvme,drive=NVME1,serial=nvme-1'
+
+
+add qemu commands to libvirt xml
+================================
+https://libvirt.org/drvqemu.html#pass-through-of-arbitrary-qemu-commands
