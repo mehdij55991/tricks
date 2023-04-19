@@ -440,12 +440,12 @@ genisoimage -r -V "Estuary Ubuntu Install CD" -J -l -o ubuntu-4.12.iso ./ubuntu1
 
 kernel
 ======
-- source
-  sudo apt install linux-source (extract bz manually under /usr/src/linux-xxx)
-  https://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/disco
-  git://kernel.ubuntu.com/ubuntu/ubuntu-disco
-- debug symbol
+- install kernel debug symbol
   https://hadibrais.wordpress.com/2017/03/13/installing-ubuntu-kernel-debugging-symbols/
+- get kernel source code
+  * get installed kernel version: dpkg -l | grep linux-image
+  * find branch/tag in https://kernel.ubuntu.com/git/ubuntu/ubuntu-focal.git
+  * git clone git://kernel.ubuntu.com/ubuntu/ubuntu-disco -b tag --depth 1
 - changelog
   https://launchpad.net/ubuntu/+source/linux/+changelog
   https://askubuntu.com/questions/55355/where-is-the-changelog-for-ubuntu-kernels
