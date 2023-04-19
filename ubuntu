@@ -444,6 +444,8 @@ kernel
   sudo apt install linux-source (extract bz manually under /usr/src/linux-xxx)
   https://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/disco
   git://kernel.ubuntu.com/ubuntu/ubuntu-disco
+- debug symbol
+  https://hadibrais.wordpress.com/2017/03/13/installing-ubuntu-kernel-debugging-symbols/
 - changelog
   https://launchpad.net/ubuntu/+source/linux/+changelog
   https://askubuntu.com/questions/55355/where-is-the-changelog-for-ubuntu-kernels
