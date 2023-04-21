@@ -45,3 +45,10 @@ $ virt-xml cyb-spdkcsi-dev --edit --confirm --qemu-commandline='-device nvme,dri
 add qemu commands to libvirt xml
 ================================
 https://libvirt.org/drvqemu.html#pass-through-of-arbitrary-qemu-commands
+
+
+fix image permission error on ubuntu22.04
+=========================================
+ERROR    Cannot access storage file '/home/cyb/vm-dev/_output/testvm1/focal-server-cloudimg-arm64.img' (as uid:64055, gid:108): Permission denied
+
+sudo setfacl -m u:libvirt-qemu:rx ${HOME}
