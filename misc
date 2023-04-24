@@ -269,3 +269,12 @@ run gui in docker
 docker run -it --rm --net host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix ubuntu:22.04 bash
 
 in container: copy host:~/.Xauthority to /root/.Xauthority
+
+
+clangd to read kernel source
+============================
+- build kernel with clang
+  * make CC=clang defconfig
+  * optionally, select wanted modules by "make CC=clang menuconfig"
+  * make CC=clang -j7
+- scripts/clang-tools/gen_compile_commands.py [sub-dirs]
