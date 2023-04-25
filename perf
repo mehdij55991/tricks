@@ -113,3 +113,11 @@ perf probe -V zap_pte_range:56
 perf probe -a 'zap_pte_range:56 page->_mapcount'
 perf record -e probe:zap_pte_range_2 -g --filter '_mapcount > 0xffff' -- ./dax
 perf script
+
+
+spe hotspot
+===========
+https://man7.org/linux/man-pages/man1/perf-arm-spe.1.html
+
+perf record -e arm_spe/event_filter=2/ -- ./mybench
+perf report --itrace=i1i

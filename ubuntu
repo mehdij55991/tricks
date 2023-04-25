@@ -451,7 +451,13 @@ kernel
   https://askubuntu.com/questions/55355/where-is-the-changelog-for-ubuntu-kernels
 - mainline kernel binary
   https://kernel.ubuntu.com/~kernel-ppa/mainline/
-
+- build kernel
+  cp /boot/config-5.15.0-69.generic .config
+  make olddefconfig
+  sed -i 's/CONFIG_SYSTEM_TRUSTED_KEYS=.*/CONFIG_SYSTEM_TRUSTED_KEYS=""/' .config
+  sed -i 's/CONFIG_SYSTEM_REVOCATION_KEYS=.*/CONFIG_SYSTEM_REVOCATION_KEYS=""/' .config
+  make -j32 LOCALVERSION=-ttt
+  WERROR=0 make -C tools/perf -j8
 
 build kernel
 ============
