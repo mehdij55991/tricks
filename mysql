@@ -13,6 +13,12 @@ show variables like '%spin%';
 set @innodb_spin_wait_pause_multiplier = 5;
 
 
+check status
+------------
+show status;
+show status like 'Innodb%';
+
+
 list tables in current db
 -------------------------
 use performance_schema;
@@ -24,6 +30,7 @@ show table structure
 --------------------
 show create table performance_schema.setup_consumers\G
 show columns from performance_schema.setup_consumers\G
+
 
 setup instruments
 -----------------
@@ -62,8 +69,43 @@ show global variables like '%page_cleaner%';
 show global status like '%buffer%wait_free%';
 
 
-reduce disk write
------------------
-https://support.huaweicloud.com/bestpractice-rds/rds_02_0010.html
-- innodb_flush_log_at_trx_commit
-- sync_binlog
+innodb_flush_log_at_trx_commit
+------------------------------
+log is opened in bufferd io mode
+0:
+  * write to mysql log buffer once per trx
+  * call os.write/os.fsync to persist mysql log buffer to disk once per second
+  * lose trx on mysql crashes, os crashes, power loss
+1: 
+  * write to mysql log buffer once per trx
+  * call os.write/os.fsync to persist mysql log buffer to disk once per trx
+2:
+  * write to mysql log buffer once per trx
+  * call os.write to push mysql log buffer to os page cache once per trx
+  * call os.fsync to persist page cache to disk once per second
+
+
+sync_binlog
+-----------
+binlog is opened in buffer io mode
+0: never call fsync
+1: call os.write/os.fsync per trx
+n: call os.write per trx, call os.fsync per n trx
+
+
+innodb_flush_method=O_DIRECT
+----------------------------
+- opens db data file in direct io mode
+- does not influence log and binlog (log and binlog always use buffered io)
+
+
+double write buffer
+-------------------
+- for data file writing, not log or binlog
+- to prevent partial 16k page writes
+- steps:
+  1. write to a special area of data file and persist to disk
+  2. write to data file and persist to disk
+- usage:
+  * if step1 is partial, data file is not changed
+  * if step2 is partial, data file page cksum is wrong, turn to special area for correct data
