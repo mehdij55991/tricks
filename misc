@@ -278,3 +278,16 @@ clangd to read kernel source
   * optionally, select wanted modules by "make CC=clang menuconfig"
   * make CC=clang -j7
 - scripts/clang-tools/gen_compile_commands.py [sub-dirs]
+
+
+gerrit
+======
+- edit project.config
+  https://stackoverflow.com/questions/22229536/edit-project-config-in-a-gerrit-project
+- disable require signed-off-by
+  * edit project.config
+    [receive]
+    requireSignedOffBy = false
+- enable -o skip-valiation
+  * https://gerrit-review.googlesource.com/Documentation/user-upload.html#skip_validation
+  * add access to "ref/*"
