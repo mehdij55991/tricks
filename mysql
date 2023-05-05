@@ -109,3 +109,8 @@ double write buffer
 - usage:
   * if step1 is partial, data file is not changed
   * if step2 is partial, data file page cksum is wrong, turn to special area for correct data
+
+
+dirty read, non-repeatable read, phantom read, isolation levels
+---------------------------------------------------------------
+https://jennyttt.medium.com/dirty-read-non-repeatable-read-and-phantom-read-bd75dd69d03a
