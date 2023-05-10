@@ -133,3 +133,11 @@ add to /etc/docker/daemon
 {
   "mtu": 1450
 }
+
+
+check if image exists
+=====================
+if docker image inspect spdkdev:latest &> /dev/null; then
+  echo "exists"
+fi
+
