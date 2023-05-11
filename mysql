@@ -55,6 +55,11 @@ select event_name,count_star,sum_timer_wait from events_waits_summary_global_by_
 select event_name,count_star,sum_timer_wait from events_waits_summary_by_instance order by sum_timer_wait,count_star;
 
 
+clear events
+------------
+truncate table events_waits_summary_global_by_event_name;
+
+
 show thread info per thread_id
 ------------------------------
 select name,thread_os_id from threads where thread_id=40
