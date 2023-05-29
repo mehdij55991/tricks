@@ -119,3 +119,9 @@ double write buffer
 dirty read, non-repeatable read, phantom read, isolation levels
 ---------------------------------------------------------------
 https://jennyttt.medium.com/dirty-read-non-repeatable-read-and-phantom-read-bd75dd69d03a
+
+
+innodb_io_capacity
+------------------
+- rate (pages/second) to flush dirty pages at background
+- https://www.percona.com/blog/give-love-to-your-ssds-reduce-innodb_io_capacity_max/
