@@ -125,3 +125,8 @@ innodb_io_capacity
 ------------------
 - rate (pages/second) to flush dirty pages at background
 - https://www.percona.com/blog/give-love-to-your-ssds-reduce-innodb_io_capacity_max/
+
+
+drop user failed
+----------------
+GRANT SYSTEM_USER ON *.* TO 'root'@'%';
