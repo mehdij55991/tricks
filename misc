@@ -302,3 +302,9 @@ bind thread to core
 ===================
 # bind to core-12
 taskset -p -c 12 <TID>
+
+
+use hugepage for code
+=====================
+https://github.com/intel/iodlr
+https://easyperf.net/blog/2022/09/01/Utilizing-Huge-Pages-For-Code
