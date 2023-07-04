@@ -176,6 +176,7 @@ sudo cpupower frequency-set -g performance
 sudo cpupower -c 79 frequency-set --max 3GHz
 cpupower -c 79 frequency-info
 sudo cpufreq-set -c 1 -u 2.8GHz
+for c in `seq 0 79`; do sudo cpufreq-set -c $c -u 2.8GHz; done
 cpufreq-info -c 1
 
 echo performance | sudo sh -c 'tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'

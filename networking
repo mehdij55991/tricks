@@ -27,6 +27,8 @@ wireshark, tshark
 -----------------
 - capture to pcap file
   $ sudo tshark -i eth0 -w /tmp/1.pcap -F pcap
+- analyse mysql protocol in wireshare gui
+  Analyze -> Decode As -> add port, protocol
 
 iptables
 --------
