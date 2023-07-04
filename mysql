@@ -130,3 +130,14 @@ innodb_io_capacity
 drop user failed
 ----------------
 GRANT SYSTEM_USER ON *.* TO 'root'@'%';
+
+
+sysbench test steps
+===================
+- before test: prepare all sql statements (update, delete, insert, ...)
+- during each test round, for each operation (e.g., delete)
+  * pick one prepared statement of that operation randomly
+  * mysql_stmt_execute(prepared_statement)
+  * repeat for each operaton (begin, upd_idx, upd_non_idx, del, ins, commit)
+- finish all test rounds, cleanup
+- sysbench --debug=on --mysql-debug=on ...
