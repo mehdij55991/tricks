@@ -309,3 +309,8 @@ use hugepage for code
 =====================
 https://github.com/intel/iodlr
 https://easyperf.net/blog/2022/09/01/Utilizing-Huge-Pages-For-Code
+
+
+show call stack at runtim
+=========================
+eu-stack -p <pid>
