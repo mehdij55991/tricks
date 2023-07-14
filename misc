@@ -314,3 +314,13 @@ https://easyperf.net/blog/2022/09/01/Utilizing-Huge-Pages-For-Code
 show call stack at runtim
 =========================
 eu-stack -p <pid>
+
+
+valgrind callgrind
+==================
+https://developer.mantidproject.org/ProfilingWithValgrind.html
+
+valgrind --tool=callgrind --instr-atstart=no --collect-atstart=no --separate-threads=yes \
+         mysqld ......
+
+stop mysqld gracefully use mysql client, otherwise logs won't be written to callgrind.pid
