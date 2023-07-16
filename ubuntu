@@ -459,6 +459,7 @@ kernel
   make -j32 LOCALVERSION=-ttt
   WERROR=0 make -C tools/perf -j8
 
+
 build kernel
 ============
 stock
@@ -492,6 +493,11 @@ upstream
   $ make -j32 LOCALVERSION=-pmem deb-pkg
   $ sudo make modules_install
   $ sudo make install
+
+
+install latest ubuntu kernel
+============================
+https://github.com/pimlie/ubuntu-mainline-kernel.sh
 
 
 git send-email
