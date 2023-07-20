@@ -127,3 +127,8 @@ show dram/ddr speed
 ===================
 sudo lshw -short -C memory
 sudo dmidecode --type 17
+
+
+count context switches of a process/thread
+==========================================
+sudo perf stat -e context-switches --tid <TID> -- sleep 1
