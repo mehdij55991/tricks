@@ -1,0 +1,24 @@
+intel pmu
+---------
+https://perfmon-events.intel.com/
+https://github.com/intel/perfmon/
+
+papi
+----
+https://icl.utk.edu/papi/
+- papi_avail -e PAPI_TOT_INS
+- papi_decode -a
+
+pmu events
+----------
+| event                 | caslake                      | neoverse            |
+| :-------------------- | :--------------------------- | :------------------ |
+| instructions          | INST_RETIRED.ANY_P           | INST_RETIRED        |
+| cycles                | ???                          | CPU_CYCLES          |
+| L1 icache misses      | ICACHE_64B.IFTAG_MISS        | L1I_CACHE_REFILL    |
+| L1 icache references  | ???                          | L1I_CACHE           |
+| L1 dcache misses      | L1D.REPLACEMENT              | L1D_CACHE_REFILL    |
+| L1 dcache references  | ???                          | L1D_CACHE           |
+| L2 cache misses       | L2_RQSTS.MISS ???            | L2D_CACHE_REFILL    |
+| retired branches      | BR_INST_RETIRED.ALL_BRANCHES | BR_RETIRED          |
+| mispredicted branches | BR_MISP_RETIRED.ALL_BRANCHES | BR_MIS_PRED_RETIRED |
