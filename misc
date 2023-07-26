@@ -324,3 +324,11 @@ valgrind --tool=callgrind --instr-atstart=no --collect-atstart=no --separate-thr
          mysqld ......
 
 stop mysqld gracefully use mysql client, otherwise logs won't be written to callgrind.pid
+
+
+disassemble specific function in a binary
+=========================================
+$ nm -C mysqld |  grep buf_block_from_ahi
+00000000022439c0 T buf_block_from_ahi(unsigned char const*)
+
+$ objdump -dC --start-address=0x00000000022439c0 mysqld | less
