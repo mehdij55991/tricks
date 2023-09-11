@@ -185,6 +185,9 @@ cpufreq-info -c 1
 
 echo performance | sudo sh -c 'tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
 
+https://www.hammerdb.com/blog/uncategorized/hammerdb-best-practice-for-postgresql-performance-and-scalability/
+x86_energy_perf_policy
+
 
 set optimization level
 ======================
