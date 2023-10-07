@@ -20,5 +20,8 @@ pmu events
 | L1 dcache misses      | L1D.REPLACEMENT              | L1D_CACHE_REFILL    |
 | L1 dcache references  | ???                          | L1D_CACHE           |
 | L2 cache misses       | L2_RQSTS.MISS ???            | L2D_CACHE_REFILL    |
+| L2 cache references   | L2_RQSTS.REFERENCES ???      | L2D_CACHE           |
+| LLC misses            | LONGEST_LAT_CACHE.MISS ???   | LL_CACHE_MISS_RD    |
+| LLC references        | LONGEST_LAT_CACHE.REFERENCE ?| LL_CACHE_RD         |
 | retired branches      | BR_INST_RETIRED.ALL_BRANCHES | BR_RETIRED          |
 | mispredicted branches | BR_MISP_RETIRED.ALL_BRANCHES | BR_MIS_PRED_RETIRED |
