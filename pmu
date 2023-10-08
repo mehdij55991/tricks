@@ -11,17 +11,23 @@ https://icl.utk.edu/papi/
 
 pmu events
 ----------
-| event                 | caslake                      | neoverse            |
-| :-------------------- | :--------------------------- | :------------------ |
-| instructions          | INST_RETIRED.ANY_P           | INST_RETIRED        |
-| cycles                | ???                          | CPU_CYCLES          |
-| L1 icache misses      | ICACHE_64B.IFTAG_MISS        | L1I_CACHE_REFILL    |
-| L1 icache references  | ???                          | L1I_CACHE           |
-| L1 dcache misses      | L1D.REPLACEMENT              | L1D_CACHE_REFILL    |
-| L1 dcache references  | ???                          | L1D_CACHE           |
-| L2 cache misses       | L2_RQSTS.MISS ???            | L2D_CACHE_REFILL    |
-| L2 cache references   | L2_RQSTS.REFERENCES ???      | L2D_CACHE           |
-| LLC misses            | LONGEST_LAT_CACHE.MISS ???   | LL_CACHE_MISS_RD    |
-| LLC references        | LONGEST_LAT_CACHE.REFERENCE ?| LL_CACHE_RD         |
-| retired branches      | BR_INST_RETIRED.ALL_BRANCHES | BR_RETIRED          |
-| mispredicted branches | BR_MISP_RETIRED.ALL_BRANCHES | BR_MIS_PRED_RETIRED |
+| event                 | caslake                         | neoverse           |
+| :-------------------- | :------------------------------ | :------------------|
+| instructions          | INST_RETIRED.ANY_P              | INST_RETIRED       |
+| cycles                | N/A                             | CPU_CYCLES         |
+| L1 icache misses      | ICACHE_64B.IFTAG_MISS           | L1I_CACHE_REFILL   |
+| L1 icache references  | N/A                             | L1I_CACHE          |
+| L1 dcache misses      | L1D.REPLACEMENT                 | L1D_CACHE_REFILL   |
+| L1 dcache references  | N/A                             | L1D_CACHE          |
+| L2 cache misses       | L2_LINES_IN.ALL                 | L2D_CACHE_REFILL   |
+| L2 misses - data      | MEM_LOAD_RETIRED.L2_MISS        | N/A                |
+| L2 misses - code      | L2_RQSTS.CODE_RD_MISS           | N/A                |
+| L2 cache references   | L2_RQSTS.REFERENCES ???         | L2D_CACHE          |
+| LLC misses            | LONGEST_LAT_CACHE.MISS ???      | LL_CACHE_MISS_RD   |
+| LLC misses - data     | UNC_CHA_TOR_INSERTS.IA_MISS_DRD | N/A                |
+| LLC misses - code     | UNC_CHA_TOR_INSERTS.IA_MISS_CRD | N/A                |
+| LLC references        | LONGEST_LAT_CACHE.REFERENCE ??? | LL_CACHE_RD        |
+| ITLB walks            | ITLB_MISSES.WALK_COMPLETED      | ITLB_WALK          |
+| DTLB walks            | DTLB_LOAD_MISSES.WALK_COMPLETED | ITLB_WALK          |
+| retired branches      | BR_INST_RETIRED.ALL_BRANCHES    | BR_RETIRED         |
+| mispredicted branches | BR_MISP_RETIRED.ALL_BRANCHES    | BR_MIS_PRED_RETIRED|
