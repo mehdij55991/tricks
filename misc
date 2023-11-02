@@ -342,10 +342,15 @@ $ nm -C mysqld |  grep buf_block_from_ahi
 $ objdump -dC --start-address=0x00000000022439c0 mysqld | less
 
 
-print matched patterns only
-===========================
+print matched substrings in a string
+====================================
 echo '100*((${r3e}/(${r11}*8))-(${r10}/${r11}))' | grep -o 'r[0-9a-f]\+'
 r3e
 r11
 r10
 r11
+
+
+Use newline as IFS
+==================
+IFS=$'\n'
