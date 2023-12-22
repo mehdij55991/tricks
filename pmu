@@ -33,3 +33,18 @@ pmu events
 | DTLB walks            | DTLB_LOAD_MISSES.WALK_COMPLETED | ITLB_WALK          |
 | retired branches      | BR_INST_RETIRED.ALL_BRANCHES   | BR_RETIRED          |
 | mispredicted branches | BR_MISP_RETIRED.ALL_BRANCHES   | BR_MIS_PRED_RETIRED |
+
+undocumented
+------------
+r100: L1 prefetch, refilled to L1
+r148: L2 prefetch
+
+L2D_CACHE_WR
+------------
+includes:
+- L1D writeback
+- L1D clean (cache line in readonly status)
+- L1I clean
+- L1 refill due to L1 prefetch
+- Streaming write to L2
+L2D_CACHE_WR ~= L1D_CACHE_REFILL + L1I_CACHE_REFILL + r100 + stream_write
