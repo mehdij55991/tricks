@@ -493,7 +493,7 @@ upstream
   $ sed -i 's/CONFIG_SYSTEM_TRUSTED_KEYS=.*/CONFIG_SYSTEM_TRUSTED_KEYS=""/' .config
   $ sed -i 's/CONFIG_SYSTEM_REVOCATION_KEYS=.*/CONFIG_SYSTEM_REVOCATION_KEYS=""/' .config
   $ make -j32 LOCALVERSION=-pmem deb-pkg
-  $ sudo make modules_install
+  $ sudo make INSTALL_MOD_STRIP=1 modules_install
   $ sudo make install
 
 
