@@ -495,6 +495,7 @@ upstream
   $ make -j32 LOCALVERSION=-pmem deb-pkg
   $ sudo make INSTALL_MOD_STRIP=1 modules_install
   $ sudo make install
+  $ make -C tools/perf -j8 FEATURE_CHECK_LDFLAGS-libtraceevent=-ltraceevent
 
 
 install latest ubuntu kernel
