@@ -112,13 +112,16 @@ $ sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 uncomment "net.ipv4.ip_forward=1" in /etc/sysctl.conf
 
 
-port mapping
-------------
-http://brianckelley.com/2015/02/simple-easy-nat-port-forwarding-for-iptables-ubuntu/
+port forwarding
+---------------
+https://tecadmin.net/setting-up-a-port-forwarding-using-iptables-in-linux/
 
-(eth1:5022 <--> 172.29.1.152:22)
-iptables -I FORWARD -p tcp -i eth1 -d 172.29.1.152 --dport 5022 -j ACCEPT
-iptables -t nat -A PREROUTING -p tcp -i eth1 -d 10.164.2.153 --dport 5022 -j DNAT --to-destination 172.29.1.152:22
+- client wants to visit dest-server:5001 through a jump-server
+- client -> jump-server:15001 -> dest-server(172.28.1.1:5001)
+- client can visit dest-server:5001 by jump-server:15001
+
+$ sudo iptables -t nat -A PREROUTING -p tcp --dport 15001 -j DNAT --to-destination 172.28.1.1:5001
+$ sudo iptables -t nat -A POSTROUTING -j MASQUERADE
 
 
 port mapping for libvirt vm
