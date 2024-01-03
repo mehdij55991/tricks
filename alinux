@@ -1,0 +1,10 @@
+install kernel debuginfo
+=========================
+- download package manually
+  * https://mirrors.aliyun.com/alinux/3/plus/aarch64/debug/
+  * wget https://mirrors.aliyun.com/alinux/3/plus/aarch64/debug/kernel-debuginfo-common-aarch64-5.10.134-15.al8.aarch64.rpm
+  * wget https://mirrors.aliyun.com/alinux/3/plus/aarch64/debug/kernel-debuginfo-5.10.134-15.al8.aarch64.rpm
+
+- install rpm manually
+  * rpm -i kernel-debuginfo-common-aarch64-5.10.134-15.al8.aarch64.rpm
+  * rpm -i kernel-debuginfo-5.10.134-15.al8.aarch64.rpm
