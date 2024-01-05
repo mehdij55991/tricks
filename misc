@@ -354,3 +354,9 @@ r11
 Use newline as IFS
 ==================
 IFS=$'\n'
+
+
+software optimization
+=====================
+https://www.anger.org
+https://www.agner.org/optimize/instruction_tables.pdf
