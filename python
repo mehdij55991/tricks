@@ -1,0 +1,23 @@
+pandas
+======
+
+create dataframe from columns
+-----------------------------
+In [1]: col1 = [1,2,3,4,5]
+In [2]: col2 = ['a','b','c','d','e']
+In [3]: pd.DataFrame(zip(col1, col2), columns=['col1','col2'])
+Out[3]:
+   col1 col2
+0     1    a
+1     2    b
+2     3    c
+3     4    d
+4     5    e
+
+create empty dataframe
+----------------------
+In [1]: pd.DataFrame(columns=['col1','col2'])
+Out[1]: 
+Empty DataFrame
+Columns: [col1, col2]
+Index: []
