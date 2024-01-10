@@ -20,7 +20,7 @@ pmu events
 | L1 dcache misses      | L1D.REPLACEMENT                | L1D_CACHE_REFILL    |
 | L1 dcache references  | N/A                            | L1D_CACHE           |
 | L2 cache misses       | L2_LINES_IN.ALL                | L2D_CACHE_REFILL    |
-| L2 misses - data      | MEM_LOAD_RETIRED.L2_MISS       | N/A                 |
+| L2 misses - data read | L2_RQSTS.DEMAND_DATA_RD_MISS   | N/A                 |
 | L2 misses - code      | L2_RQSTS.CODE_RD_MISS          | N/A                 |
 | L2 cache references   | L2_RQSTS.REFERENCES ???        | L2D_CACHE           |
 | LLC misses            | LONGEST_LAT_CACHE.MISS ???     | LL_CACHE_MISS_RD    |
