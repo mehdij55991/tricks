@@ -588,7 +588,7 @@ gnome terminal
 ==============
 - color theme
   install dconf gconf2
-  https://mayccoll.github.io/Gogh/
+  https://github.com/Gogh-Co/Gogh
   [Teerb]
 
 - windows size shrink
@@ -653,9 +653,13 @@ find peak RSS of a process
 install latest clang
 ====================
 curl -s https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-sudo apt-add-repository "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main"
+sudo apt-add-repository "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-16 main"
 sudo apt update
-sudo apt install clang-13
+sudo apt install clang-16
+
+wget https://apt.llvm.org/llvm.sh
+chmod u+x llvm.sh
+sudo ./llvm.sh 16
 
 
 ssh issue on ubuntu-22.04
