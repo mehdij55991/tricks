@@ -675,3 +675,10 @@ sudo sysctl -w kernel.task_delayacct=1
 get primary ip
 ==============
 hostname -I | awk '{print $1}'
+
+
+recovery with install cd
+========================
+- boot with install iso
+- edit grub menu to append "systemd.unit=rescue.target" to kernel command line
+- watch console, enter recovery mode
