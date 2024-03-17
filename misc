@@ -360,3 +360,14 @@ software optimization
 =====================
 https://www.anger.org
 https://www.agner.org/optimize/instruction_tables.pdf
+
+
+override acpi table
+===================
+Follow kernel document:
+* https://www.kernel.org/doc/Documentation/acpi/initrd_table_override.txt
+* MUST increase table version!!
+      DefinitionBlock ("", "DSDT", 2, "ARMLTD", "LTSOC   ", 0x20181101) --> 0x20181102
+
+Reference archlinux doc:
+* https://wiki.archlinux.org/title/DSDT
