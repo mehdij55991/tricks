@@ -1,0 +1,16 @@
+print parent process info when new process created
+==================================================
+#!/usr/bin/bpftrace
+
+#include <linux/sched.h>
+
+BEGIN
+{
+    printf("Show parent process do fork...\n");
+}
+
+kprobe:__arm64_sys_clone
+{
+    printf("PID: %d, CMD: %s;\tPPID: %d, Parent CMD: %s\n",
+        pid, comm, curtask->real_parent->pid, curtask->real_parent->comm);
+}
