@@ -682,3 +682,8 @@ recovery with install cd
 - boot with install iso
 - edit grub menu to append "systemd.unit=rescue.target" to kernel command line
 - watch console, enter recovery mode
+
+
+hide mounted volumn on sidebar
+==============================
+gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
