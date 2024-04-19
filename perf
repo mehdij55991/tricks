@@ -132,3 +132,18 @@ sudo dmidecode --type 17
 count context switches of a process/thread
 ==========================================
 sudo perf stat -e context-switches --tid <TID> -- sleep 1
+
+
+perf sched timehist to csv
+==========================
+perf sched timehist -i perf.data | \
+awk 'NR > 3 {
+    cpu = $2;
+    task_name = $3;
+    wait_time = $4;
+    sch_delay = $5;
+    run_time = $6;
+
+    # Format the output as CSV and append to the output file
+    print cpu "," task_name "," wait_time "," sch_delay "," run_time;
+}'
