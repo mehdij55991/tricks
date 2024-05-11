@@ -152,3 +152,8 @@ awk 'NR > 3 {
 profile code segment
 ====================
 https://pramodkumbhar.com/2024/04/linux-perf-measuring-specific-code-sections-with-pause-resume-apis/
+
+
+cpu code locality tool
+======================
+https://github.com/NVIDIA/cpu-code-locality-tool
