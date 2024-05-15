@@ -1,6 +1,6 @@
 print parent process info when new process created
 ==================================================
-#!/usr/bin/bpftrace
+#!/usr/bin/env bpftrace
 
 #include <linux/sched.h>
 
@@ -13,4 +13,28 @@ kprobe:__arm64_sys_clone
 {
     printf("PID: %d, CMD: %s;\tPPID: %d, Parent CMD: %s\n",
         pid, comm, curtask->real_parent->pid, curtask->real_parent->comm);
+}
+
+
+trace user function latency
+===========================
+#!/usr/bin/env bpftrace
+
+uprobe:/lib/x86_64-linux-gnu/libc.so.6:pthread_cond_signal
+{
+    @start_time[tid] = nsecs;
+}
+
+uretprobe:/lib/x86_64-linux-gnu/libc.so.6:pthread_cond_signal
+/@start_time[tid]/
+{
+    @latency[comm, tid] = hist(nsecs - @start_time[tid]);
+    delete(@start_time[tid]);
+}
+
+interval:s:5
+{
+    print("==============================================================\n");
+    print(@latency);
+    clear(@latency);
 }
