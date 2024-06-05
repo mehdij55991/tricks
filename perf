@@ -157,3 +157,36 @@ https://pramodkumbhar.com/2024/04/linux-perf-measuring-specific-code-sections-wi
 cpu code locality tool
 ======================
 https://github.com/NVIDIA/cpu-code-locality-tool
+
+
+n2 topdown
+==========
+frontend_bound = 100 * ((STALL_SLOT_FRONTEND - CPU_CYCLES) / (5 * CPU_CYCLES) - BR_MIS_PRED / CPU_CYCLES)
+
+backend_bound = 100 * (STALL_SLOT_BACKEND / (5 * CPU_CYCLES) - 3 * BR_MIS_PRED / CPU_CYCLES)
+
+bad_speculation = 100 * ((1 - OP_RETIRED / OP_SPEC) * (1 - (STALL_SLOT - CPU_CYCLES) / (5 * CPU_CYCLES)) + 4 * BR_MIS_PRED / CPU_CYCLES)
+
+retiring = 100 * (OP_RETIRED / OP_SPEC * (1 - (STALL_SLOT - CPU_CYCLES) / (5 * CPU_CYCLES)))
+
+
+v2 topdown
+==========
+frontend_bound = 100 * (STALL_SLOT_FRONTEND / (8 * CPU_CYCLES) - BR_MIS_PRED / CPU_CYCLES)
+
+backend_bound = 100 * (STALL_SLOT_BACKEND / (8 * CPU_CYCLES) - 3 * BR_MIS_PRED / CPU_CYCLES)
+
+bad_speculation = 100 * ((1 - OP_RETIRED / OP_SPEC) * (1 - STALL_SLOT / (8 * CPU_CYCLES)) + 4 * BR_MIS_PRED / CPU_CYCLES)
+
+retiring = 100 * (OP_RETIRED / OP_SPEC * (1 - STALL_SLOT / (8 * CPU_CYCLES)))
+
+
+v1 topdown
+==========
+frontend_bound = 100 * (STALL_SLOT_FRONTEND / (8 * CPU_CYCLES) - 4 * BR_MIS_PRED / CPU_CYCLES)
+
+backend_bound = 100 * (STALL_SLOT_BACKEND / (8 * CPU_CYCLES))
+
+bad_speculation = 100 * ((1 - OP_RETIRED / OP_SPEC) * (1 - STALL_SLOT / (8 * CPU_CYCLES)) + 4 * BR_MIS_PRED / CPU_CYCLES)
+
+retiring = 100 * (OP_RETIRED / OP_SPEC * (1 - STALL_SLOT / (8 * CPU_CYCLES)))
