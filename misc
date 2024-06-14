@@ -252,6 +252,11 @@ $ echo "int;" | gcc -dM -E -
 $ echo "int;" | clang -dM -E -
 
 
+list gcc header file search path
+================================
+$ echo | gcc -E -Wp,-v -
+
+
 tcsh set locale
 ===============
 - list all locale
