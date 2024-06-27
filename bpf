@@ -38,3 +38,60 @@ interval:s:5
     print(@latency);
     clear(@latency);
 }
+
+
+case study: trace kernel function tcp_sendmsg
+=============================================
+
+requirement
+-----------
+- how many calls per second
+- distribution of packet sizes
+
+check tcp_sendmsg args
+----------------------
+- install kernel debug symbol and source code
+- inspect tcp_sendmsg args
+  $ sudo perf probe -V tcp_sendmsg -s /usr/source/linux-source-version
+    Available variables at tcp_sendmsg
+            @<tcp_sendmsg+0>
+                    size_t  size
+                    struct msghdr*  msg
+                    struct sock*    sk
+- check source code
+  * get function address
+    $ nm path-to-vmlinux-dbg | grep tcp_sendmsg
+  * get source code and line
+    $ addr2line -e path-to-vmlinux-dbg <address>
+
+trace packet size distribution
+------------------------------
+sudo bpftrace -e '
+    k:tcp_sendmsg /pid == <CLIENT-PID>/ {
+        @size = hist(arg2);
+    }
+
+    interval:s:5 {
+        exit();
+    }
+'
+
+trace invocations
+-----------------
+sudo bpftrace -e '
+    kprobe:tcp_sendmsg /pid == <CLIENT-PID>/ {
+        @start[tid] = nsecs;
+    }
+
+    kretprobe:tcp_sendmsg /pid == <CLIENT-PID> && @start[tid]/ {
+        $latency = nsecs - @start[tid];
+        @latency_hist = hist($latency);
+        delete(@start[tid]);
+    }
+
+    interval:s:5 {
+        print(@latency_hist);
+        clear(@latency_hist);
+        exit();
+    }
+'
