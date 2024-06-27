@@ -376,3 +376,8 @@ Follow kernel document:
 
 Reference archlinux doc:
 * https://wiki.archlinux.org/title/DSDT
+
+
+get function size
+=================
+nm --print-size --size-sort --radix=d elf-binary-file
