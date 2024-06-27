@@ -687,3 +687,19 @@ recovery with install cd
 hide mounted volumn on sidebar
 ==============================
 gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
+
+
+debian install kernel debug symbol, source
+==========================================
+debug symbol
+- add deb-src to /etc/apt/sources.list
+- sudo apt install linux-image-$(uname -r)-dbg
+
+source
+- ad deb-src to /etc/apt/sources.list
+- search & install wanted linux source package
+  * apt search linux-source
+  * sudo apt install linux-source-version
+- extract package manually
+  * cd /usr/src
+  * xzcat linux-source-version.tar.xz | tar xvf -
