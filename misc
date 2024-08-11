@@ -35,10 +35,17 @@ iommu+vfio
 
 hugepage
 ========
-- alloate hugepages
+- alloate hugepages at runtime
   echo 2048 > /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
-- per node hugepage
-  /sys/devices/system/node/[node_id]/hugepages/hugepages-2048kB/nr_hugepages
+  # per node
+  echo 8 > /sys/devices/system/node/node0/hugepages/hugepages-1048576kB/nr_hugepages
+- allocate hugepages at boottime
+  GRUB_CMDLINE_LINUX="hugepagesz=1G hugepages=8"
+- mount hugepage per pagesize
+  mount -t hugetlbfs nodev -o pagesize=1G /mnt/huge1g
+- use hugepage
+  int fd = open("/mnt/huge1g/tmpfile", O_RDWR | O_CREAT);
+  void* addr = mmap(NULL, 1024*1024*1024, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
 - check processes using hugepages
   https://access.redhat.com/solutions/320303
   grep "KernelPageSize:     2048 kB" /proc/[[:digit:]]*/smaps | awk {'print $1'} | cut -d "/" -f3 | sort | uniq
