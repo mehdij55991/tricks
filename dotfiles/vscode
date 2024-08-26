@@ -1,0 +1,29 @@
+.config/Code/User/settings.json
+-------------------------------
+{
+    "python.defaultInterpreterPath": "/home/cyb/.venv/bin/python",
+    "vim.whichwrap": "b,s,<,>",
+    "continue.enableTabAutocomplete": false,
+    "continue.telemetryEnabled": false
+}
+
+
+.config/Code/User/keybindings.json
+----------------------------------
+[
+    {
+        "key": "tab",
+        "command": "-acceptSelectedSuggestion",
+        "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "tab",
+        "command": "selectNextSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus && !inSnippetMode"
+    },
+    {
+        "key": "shift+tab",
+        "command": "selectPrevSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus && !inSnippetMode"
+    }
+]
