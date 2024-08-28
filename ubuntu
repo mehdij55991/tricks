@@ -703,3 +703,9 @@ source
 - extract package manually
   * cd /usr/src
   * xzcat linux-source-version.tar.xz | tar xvf -
+
+
+add to favorite
+===============
+fix issues that some app cannot pin to favorite bar
+https://averagelinuxuser.com/ubuntu_custom_launcher_dock/
