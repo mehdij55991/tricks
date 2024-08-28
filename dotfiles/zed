@@ -1,0 +1,80 @@
+.config/zed/settings.json
+=========================
+{
+  "ensure_final_newline_on_save": false,
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
+  "vim_mode": true,
+  "features": {
+    "inline_completion_provider": "none"
+  },
+  "assistant": {
+    "default_model": {
+      "provider": "openai",
+      "model": "deepseek-coder"
+    },
+    "version": "2"
+  },
+  "language_models": {
+    "openai": {
+      "version": "1",
+      "available_models": [
+        {
+          "name": "deepseek-coder",
+          "max_tokens": 128000
+        }
+      ],
+      "api_url": "https://api.deepseek.com"
+    }
+  },
+  "lsp": {
+    "pyright": {
+      "settings": {
+        "python": {
+          "pythonPath": "/home/cyb/.venv/bin/python"
+        }
+      }
+    }
+  },
+  "languages": {
+    "Python": {
+      "wrap_guides": [80]
+    },
+    "C": {
+      "wrap_guides": [80]
+    },
+    "C++": {
+      "tab_size": 2,
+      "wrap_guides": [90]
+    }
+  }
+}
+
+format file
+-----------
+  "languages": {
+    "Python": {
+      "formatter": {
+        "external": {
+          "command": "/home/cyb/.venv/bin/autopep8",
+          "arguments": ["--max-line-length", "80", "--experimental", "-"]
+        }
+      }
+    }
+  }
+
+
+.config/zed/keymap.json
+=======================
+[
+    {
+        "context": "Editor && showing_completions",
+        "bindings": {
+            "tab": "editor::ContextMenuNext",
+            "shift-tab": "editor::ContextMenuPrev"
+        }
