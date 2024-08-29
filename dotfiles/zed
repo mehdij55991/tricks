@@ -1,7 +1,6 @@
 .config/zed/settings.json
 =========================
 {
-  "ensure_final_newline_on_save": false,
   "ui_font_size": 16,
   "buffer_font_size": 16,
   "theme": {
