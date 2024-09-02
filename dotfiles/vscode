@@ -4,7 +4,29 @@
     "python.defaultInterpreterPath": "/home/cyb/.venv/bin/python",
     "vim.whichwrap": "b,s,<,>",
     "continue.enableTabAutocomplete": false,
-    "continue.telemetryEnabled": false
+    "continue.telemetryEnabled": false,
+    "files.insertFinalNewline": true,
+    "[python]": {
+        "editor.rulers": [
+            {
+                "column": 80
+            }
+        ]
+    },
+    "[c]": {
+        "editor.rulers": [
+            {
+                "column": 80
+            }
+        ]
+    },
+    "[cpp]": {
+        "editor.rulers": [
+            {
+                "column": 90
+            }
+        ]
+    }
 }
 
 
