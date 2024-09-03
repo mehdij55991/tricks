@@ -1,6 +1,10 @@
 .config/zed/settings.json
 =========================
 {
+  "format_on_save": "off",
+  "show_completions_on_input": false,
+  "auto_signature_help": false,
+  "show_signature_help_after_edits": false,
   "ui_font_size": 16,
   "buffer_font_size": 16,
   "theme": {
