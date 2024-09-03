@@ -2,7 +2,7 @@
 -------------------------------
 {
     "python.defaultInterpreterPath": "/home/cyb/.venv/bin/python",
-    "vim.whichwrap": "b,s,<,>",
+    "vim.whichwrap": "b,s,<,>,[,]",
     "continue.enableTabAutocomplete": false,
     "continue.telemetryEnabled": false,
     "files.insertFinalNewline": true,
