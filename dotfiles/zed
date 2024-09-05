@@ -75,18 +75,25 @@ format file
 .config/zed/keymap.json
 =======================
 [
-    {
-        "context": "Editor && showing_completions",
-        "bindings": {
-            "tab": "editor::ContextMenuNext",
-            "shift-tab": "editor::ContextMenuPrev"
-        }
-    },
-    {
-         "context": "Editor",
-         "bindings": {
-             "pageup": "editor::MovePageUp",
-             "pagedown": "editor::MovePageDown"
-        }
+  {
+    "context": "Editor && showing_completions",
+    "bindings": {
+      "tab": "editor::ContextMenuNext",
+      "shift-tab": "editor::ContextMenuPrev"
     }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "pageup": "editor::MovePageUp",
+      "pagedown": "editor::MovePageDown"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      "left": "vim::Backspace",
+      "right": "vim::Space"
+    }
+  }
 ]
