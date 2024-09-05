@@ -81,3 +81,12 @@ format file
             "tab": "editor::ContextMenuNext",
             "shift-tab": "editor::ContextMenuPrev"
         }
+    },
+    {
+         "context": "Editor",
+         "bindings": {
+             "pageup": "editor::MovePageUp",
+             "pagedown": "editor::MovePageDown"
+        }
+    }
+]
