@@ -83,7 +83,7 @@ format file
     }
   },
   {
-    "context": "Editor",
+    "context": "Editor && (vim_mode == normal && vim_mode != visual) && !VimWaiting && !menu",
     "bindings": {
       "pageup": "editor::MovePageUp",
       "pagedown": "editor::MovePageDown"
