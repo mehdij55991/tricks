@@ -389,3 +389,27 @@ Reference archlinux doc:
 get function size
 =================
 nm --print-size --size-sort --radix=d elf-binary-file
+
+
+arm cache maintenace
+====================
+https://developer.arm.com/documentation/ddi0500/j/System-Control/AArch64-register-summary/AArch64-cache-maintenance-operations
+
+invalidate all icache
+---------------------
+asm volatile("dsb   ish"     : : : "memory");
+asm volatile("ic    ialluis" : : : "memory");
+asm volatile("dsb   ish"     : : : "memory");
+asm volatile("isb"           : : : "memory");
+
+invalidate icache by line
+-------------------------
+asm volatile("dsb   ish" : : : "memory");
+for (unsigned long address = start; address < end; address += 64) {
+    asm volatile ("ic    ivau, %0"
+        :
+        : "r" (address)
+        : "memory");
+}
+asm volatile("dsb   ish" : : : "memory");
+asm volatile("isb"       : : : "memory");
