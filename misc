@@ -170,6 +170,13 @@ curl -sL ${URL}/${GOPKG} | sudo tar -C /usr/local -xzf -
 export PATH=${PATH}:/usr/local/go/bin
 
 
+goproxy
+------
+Fix https://proxy.golang.org tls certificate error
+
+go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
+
+
 Modify other's PR
 =================
 https://tighten.co/blog/adding-commits-to-a-pull-request/
