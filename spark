@@ -1,0 +1,6 @@
+view job history after done
+---------------------------
+https://spark.apache.org/docs/latest/monitoring.html#web-interfaces
+- spark.eventLog.enabled = true
+- start-history-server.sh
+- http://<server-url>:18080
