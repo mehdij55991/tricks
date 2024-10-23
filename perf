@@ -115,6 +115,11 @@ perf record -e probe:zap_pte_range_2 -g --filter '_mapcount > 0xffff' -- ./dax
 perf script
 
 
+spe
+===
+sudo perf record -e arm_spe_0/branch_filter=0,ts_enable=1,pct_enable=1,pa_enable=1,load_filter=1,jitter=1,store_filter=1,min_latency=0/ -g --tid <TID> -- sleep 2
+
+
 spe hotspot
 ===========
 https://man7.org/linux/man-pages/man1/perf-arm-spe.1.html
