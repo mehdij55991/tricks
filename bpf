@@ -102,20 +102,22 @@ trace memcpy size
 CAVEAT: trace libc.so.6:memcpy directly doesn't work
 
 - wrap memcpy in a so
-$ echo memcpy.c
+$ cat memcpy.c
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <string.h>
 #include <dlfcn.h>
 
 void *memcpy(void *dest, const void *src, size_t n) {
-    void *(*libc_memcpy)(void *, const void *, size_t) = NULL;
+    static void *(*libc_memcpy)(void *, const void *, size_t) = NULL;
 
-    libc_memcpy = (void *(*)(void *, const void *, size_t))dlsym(RTLD_NEXT, "memcpy");
+    if (!libc_memcpy)
+        libc_memcpy = (void *(*)(void *, const void *, size_t))dlsym(RTLD_NEXT, "memcpy");
 
     return libc_memcpy(dest, src, n);
 }
 
-$ gcc -shared -fPIC -o memcpy.so memcpy.c
+$ gcc -g -O2 -shared -fPIC -o memcpy.so memcpy.c
 
 $ sudo bpftrace -e '
 uprobe:./memcpy.so:memcpy {
