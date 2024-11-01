@@ -425,3 +425,8 @@ asm volatile("isb"       : : : "memory");
 inject code at app load time with LD_RELOAD
 ===========================================
 https://github.com/ProfessionallyEvil/LD_PRELOAD-run-at-load-time?tab=readme-ov-file
+
+
+rsync partial transfers
+=======================
+rsync --partial --progress --append-verify <source> <destination>
