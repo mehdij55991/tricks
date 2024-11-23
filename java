@@ -41,3 +41,12 @@ $ cat DubboClient.java
 ...
 import com.alibaba.com.caucho.hessian.io.SerializerFactory;
 ...
+
+
+inspect code cache
+==================
+https://www.jasonpearson.dev/codecache-in-jvm-builds/
+- jconsole
+- jdk16+: jcmd <PID> Compiler.CodeHeap_Analytics
+- jdk9+:  jcmd <PID> Compiler.codecache
+- jdk8:   +PrintCodeCache, +PrintCodeCacheOnCompilation
