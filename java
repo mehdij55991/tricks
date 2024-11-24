@@ -43,10 +43,20 @@ import com.alibaba.com.caucho.hessian.io.SerializerFactory;
 ...
 
 
-inspect code cache
-==================
+code cache
+==========
+
+inspect
+-------
 https://www.jasonpearson.dev/codecache-in-jvm-builds/
+http://www.onemusicapi.com/blog/2021/01/13/understanding-code-cache-listing/
 - jconsole
 - jdk16+: jcmd <PID> Compiler.CodeHeap_Analytics
 - jdk9+:  jcmd <PID> Compiler.codecache
+          jcmd <PID> Compiler.Compiler.codelist
 - jdk8:   +PrintCodeCache, +PrintCodeCacheOnCompilation
+
+hot code heap
+-------------
+https://github.com/bell-sw/hotcode-agent/blob/master/results/performance.adoc
+https://bugs.openjdk.org/browse/JDK-8328186
