@@ -38,6 +38,7 @@ undocumented
 ------------
 r100: L1 prefetch, refilled to L1
 r148: L2 prefetch
+r108: L2 intruction refill
 
 L2D_CACHE_WR
 ------------
