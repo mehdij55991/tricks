@@ -430,8 +430,3 @@ https://github.com/ProfessionallyEvil/LD_PRELOAD-run-at-load-time?tab=readme-ov-
 rsync partial transfers
 =======================
 rsync --partial --progress --append-verify <source> <destination>
-
-
-watch net rx softirq
-====================
-watch -n 1 -d grep NET_RX /proc/softirqs

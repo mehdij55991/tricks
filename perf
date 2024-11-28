@@ -195,3 +195,16 @@ backend_bound = 100 * (STALL_SLOT_BACKEND / (8 * CPU_CYCLES))
 bad_speculation = 100 * ((1 - OP_RETIRED / OP_SPEC) * (1 - STALL_SLOT / (8 * CPU_CYCLES)) + 4 * BR_MIS_PRED / CPU_CYCLES)
 
 retiring = 100 * (OP_RETIRED / OP_SPEC * (1 - STALL_SLOT / (8 * CPU_CYCLES)))
+
+
+bind nic to core
+================
+- loopback
+  pin to cpu0: echo 1 > /sys/class/net/lo/queues/rx-0/rps_cpus
+- mellanox nic
+  https://github.com/Mellanox/mlnx-tools
+
+
+watch net rx softirq
+====================
+watch -n 1 -d grep NET_RX /proc/softirqs
