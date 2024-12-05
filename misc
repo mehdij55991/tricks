@@ -254,6 +254,12 @@ ipmitool -H <host> -I lanplus -U <user> -P <pass> chassis power on/off/status
 ipmitool -H <host> -I lanplus -U <user> -P <pass> sol activate/deactivate
 
 
+get power consumption
+=====================
+ipmitool -H <host> -I lanplus -U <user> -P <pass> dcmi power reading
+redfishtool -r <host> -u <user> -p <pass> Chassis getPowerReading
+
+
 check enabled optimizations per '-O?'
 ====================================
 https://stackoverflow.com/a/15548189/6837980
