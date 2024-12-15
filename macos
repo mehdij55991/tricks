@@ -1,0 +1,5 @@
+disable double finger navigation for chrome
+-------------------------------------------
+run below command in console:
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool FALSE
+
