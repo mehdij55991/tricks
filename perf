@@ -208,3 +208,8 @@ bind nic to core
 watch net rx softirq
 ====================
 watch -n 1 -d grep NET_RX /proc/softirqs
+
+
+tracepoint info
+===============
+cat /sys/kernel/debug/tracing/events/sched/sched_process_exec/format
