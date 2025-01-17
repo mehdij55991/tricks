@@ -213,16 +213,3 @@ watch -n 1 -d grep NET_RX /proc/softirqs
 tracepoint info
 ===============
 cat /sys/kernel/debug/tracing/events/sched/sched_process_exec/format
-
-
-perf java jit code
-==================
-- install or build libperf-jvmti.so (source in linux/tools/perf)
-- perf record -g -k 1 -- \
-      java \
-      -XX:+PreserveFramePointer \
-      -agentpath:/usr/local/lib/libperf-jvmti.so \
-      mytest
-  * jit dump is saved to ~/.debug/jit/java-jit-xxxx
-- perf inject --jit -i perf.data -o perf.data.jitted
-- perf report --no-child -i perf.data.jitted --no-source

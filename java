@@ -60,3 +60,38 @@ hot code heap
 -------------
 https://github.com/bell-sw/hotcode-agent/blob/master/results/performance.adoc
 https://bugs.openjdk.org/browse/JDK-8328186
+
+
+perf java jit code
+==================
+- install or build libperf-jvmti.so (source in linux/tools/perf)
+- perf record -g -k 1 -- \
+      java \
+      -XX:+PreserveFramePointer \
+      -agentpath:/usr/local/lib/libperf-jvmti.so \
+      mytest
+  * jit dump is saved to ~/.debug/jit/java-jit-xxxx
+- perf inject --jit -i perf.data -o perf.data.jitted
+- perf report --no-child -i perf.data.jitted --no-source
+
+
+dump jit code
+=============
+- https://blogs.oracle.com/javamagazine/post/java-hotspot-hsdis-disassembler
+- build or download hsdis plugin (https://chriswhocodes.com/hsdis/)
+- LD_LIBRARY_PATH=/home/cyb/hsdis/ java \
+      -XX:+UnlockDiagnosticVMOptions \
+      -XX:CompileCommand=dontinline,*.arrayEquals \
+      -XX:CompileCommand=print,*.arrayEquals \
+      ArrayEqualsTest
+- java -XX:CompileCommand=help
+
+
+profile
+=======
+- [IMPORTANT] start profiled java process with
+  "-XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints" to get more accurate
+  information for inlined functions
+- use async profiler:
+  $ ./asprof start -i 997us `pgrep java`
+  $ ./asprof stop -o flamegraph -f 1.html `pgrep java`
