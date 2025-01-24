@@ -4,3 +4,12 @@ https://spark.apache.org/docs/latest/monitoring.html#web-interfaces
 - spark.eventLog.enabled = true
 - start-history-server.sh
 - http://<server-url>:18080
+
+
+inspect catalyst generated code
+-------------------------------
+val q = spark.sql("select * from table1")
+// execute AQE optimization
+q.queryExecution.executedPlan.executeTake(1)
+// dump catalyst generated code
+q.debugCodegen
