@@ -92,6 +92,19 @@ profile
 - [IMPORTANT] start profiled java process with
   "-XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints" to get more accurate
   information for inlined functions
-- use async profiler:
-  $ ./asprof start -i 997us `pgrep java`
-  $ ./asprof stop -o flamegraph -f 1.html `pgrep java`
+
+- async profiler
+  $ asprof -d 10 -f cpu.html `pgrep java`
+
+  # seperate start/stop
+  $ asprof start -i 997us `pgrep java`
+  $ asprof stop -o flamegraph -f cpu.html `pgrep java`
+
+  # separate threads
+  $ asprof start -d 10 -t -f cpu-per-tid.html `pgrep java`
+
+  # specify threads
+  $ asprof -d 10 --filter 105703-105706,105710 -f cpu-per-tid.html `pgrep java`
+
+  # wall clock (filter threads)
+  $ asprof -e wall -d 10 --filter 105703-105706,105710 -f wall.html `pgrep java`
