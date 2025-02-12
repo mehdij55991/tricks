@@ -108,3 +108,10 @@ profile
 
   # wall clock (filter threads)
   $ asprof -e wall -d 10 --filter 105703-105706,105710 -f wall.html `pgrep java`
+
+
+list vm flags
+=============
+- https://chriswhocodes.com/
+- java -XX:+PrintFlagsFinal -version
+- jcmd [pid] VM.flags
