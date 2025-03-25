@@ -35,15 +35,32 @@ iommu+vfio
 
 hugepage
 ========
-- alloate hugepages at runtime
-  echo 2048 > /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
-  # per node
-  echo 8 > /sys/devices/system/node/node0/hugepages/hugepages-1048576kB/nr_hugepages
-- allocate hugepages at boottime
-  GRUB_CMDLINE_LINUX="hugepagesz=1G hugepages=8"
-- mount hugepage per pagesize
-  mount -t hugetlbfs nodev -o pagesize=1G /mnt/huge1g
-- use hugepage
+
+kernel cmdline
+--------------
+# allocate at boot time
+GRUB_CMDLINE_LINUX="default_hugepagesz=1G hugepagesz=1G hugepages=8"
+# allocate at runtime 
+GRUB_CMDLINE_LINUX="default_hugepagesz=1G hugepagesz=1G"
+
+allocate per numa
+-----------------
+echo echo 20 > /sys/devices/system/node/node0/hugepages/hugepages-1048576kB/nr_hugepages
+
+check hugepage usage per numa
+-----------------------------
+cat /sys/devices/system/node/node0/meminfo | grep -i huge
+
+allocate system wide
+--------------------
+echo 2048 > /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
+
+mount hugetlbfs
+---------------
+mount -t hugetlbfs nodev -o pagesize=1G /mnt/huge1g
+
+use hugepage
+------------
   int fd = open("/mnt/huge1g/tmpfile", O_RDWR | O_CREAT);
   void* addr = mmap(NULL, 1024*1024*1024, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
 - check processes using hugepages
