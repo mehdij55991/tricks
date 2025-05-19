@@ -8,22 +8,13 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'cyb70289/Zenburn'
 call plug#end()
-let g:lsp_diagnostics_enabled = 0
-let g:lsp_document_highlight_enabled = 0
-let g:lsp_document_code_action_signs_enabled = 0
-nmap <buffer> gd <plug>(lsp-definition)
-nmap <buffer> -gd :sp<cr>:LspDefinition<cr>
-nmap <buffer> \gd :vsp<cr>:LspDefinition<cr>
-"nmap <buffer> pd <plug>(lsp-peek-definition)
-nmap <buffer> gh <plug>(lsp-hover)
-nmap <buffer> gr <plug>(lsp-references)
 
 " https://github.com/prabirshrestha/vim-lsp/wiki
 if executable('clangd')
   au User lsp_setup call lsp#register_server({
     \ 'name': 'clangd',
     \ 'cmd': {server_info->['clangd', '-background-index', '-header-insertion=never']},
-    \ 'whitelist': ['c', 'cpp'],
+    \ 'whitelist': ['c', 'cpp', 'cc', 'C'],
     \ })
 endif
 if executable('gopls')
@@ -42,6 +33,30 @@ if executable('pyls')
     \ 'whitelist': ['python'],
     \ })
 endif
+
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=no
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> -gd :sp<cr>:LspDefinition<cr>
+  nmap <buffer> \gd :vsp<cr>:LspDefinition<cr>
+  nmap <buffer> gh <plug>(lsp-hover)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> gi <plug>(lsp-implementation)
+
+  let g:lsp_diagnostics_enabled = 0
+  let g:lsp_diagnostics_virtual_text_enabled = 0
+  let g:lsp_document_highlight_enabled = 0
+  let g:lsp_document_code_action_signs_enabled = 0
+  "let g:lsp_format_sync_timeout = 1000
+endfunction
+
+augroup lsp_install
+  au!
+  " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 " https://github.com/prabirshrestha/asyncomplete.vim
 " tab to pop and select autocompletions, c-v tab to insert a real tab
@@ -88,6 +103,7 @@ colorscheme zenburn
 " per file type configuration
 autocmd Filetype java setlocal sw=2 ts=2 expandtab
 autocmd Filetype cpp setlocal sw=2 ts=2 expandtab
+autocmd Filetype json setlocal sw=2 ts=2 expandtab
 autocmd BufNewFile,BufRead *.make set tabstop=4 shiftwidth=4 noexpandtab
 "autocmd BufNewFile,BufRead *.ic set syntax=cpp
 
