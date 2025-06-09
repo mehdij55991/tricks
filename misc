@@ -462,3 +462,10 @@ aria2c \
   -x 4 -s 4 -c --max-tries=0 --retry-wait=5 \
   https://www.modelscope.cn/models/LLM-Research/Meta-Llama-3.1-8B-Instruct-hf-Q4_K_M-GGUF/resolve/master/meta-llama-3.1-8b-instruct-hf-q4_k_m.gguf
   -o meta-llama-3.1-8b-instruct-hf-q4_k_m.gguf
+
+
+video source
+============
+https://www.pexels.com/
+https://mixkit.co/
+https://media.xiph.org/video/derf/
