@@ -469,3 +469,14 @@ video source
 https://www.pexels.com/
 https://mixkit.co/
 https://media.xiph.org/video/derf/
+
+
+adjust max open files per process
+=================================
+# sysctl -w fs.nr_open=12345678
+# ulimit -n 12345678
+
+
+show libs loaded in process
+===========================
+LD_DEBUG=libs,files
