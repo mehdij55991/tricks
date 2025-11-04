@@ -190,7 +190,7 @@ enable ssh password login
 ==========================
 $ sudo vi /etc/ssh/sshd_config
   "PasswordAuthentication yes"
-  "ChallengeResponseAuthentication yes"
+  "KbdInteractiveAuthentication yes"
   "UsePAM yes"
 
 $ sudo /etc/init.d/ssh reload
