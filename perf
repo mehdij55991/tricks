@@ -213,3 +213,9 @@ watch -n 1 -d grep NET_RX /proc/softirqs
 tracepoint info
 ===============
 cat /sys/kernel/debug/tracing/events/sched/sched_process_exec/format
+
+
+allow perf for user
+===================
+sudo sysctl -w kernel.perf_event_paranoid=-1
+sudo sysctl -w kernel.kptr_restrict=0
