@@ -26,4 +26,7 @@ set t_Co=256
 let g:zenburn_disable_Label_underline = 1
 "colorscheme zenburn
 
+" don't auto insert comment mark
+autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
+
 set viminfo-=<50,s10
