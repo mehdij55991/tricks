@@ -709,3 +709,8 @@ add to favorite
 ===============
 fix issues that some app cannot pin to favorite bar
 https://averagelinuxuser.com/ubuntu_custom_launcher_dock/
+
+
+install package debug symbol
+============================
+https://documentation.ubuntu.com/server/explanation/debugging/debug-symbol-packages/
