@@ -1,4 +1,16 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"]
+  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"],
+  "permission": {
+    "external_directory": {
+      "**": "ask"
+    },
+    "read": {
+      "**": "allow"
+    },
+    "edit": {
+      "*": "deny",
+      "/tmp/**": "allow"
+    }
+  }
 }
